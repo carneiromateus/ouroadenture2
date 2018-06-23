@@ -1,0 +1,34 @@
+<% content_for :title do %>
+  <%= "Festival de Inverno" %>
+<% end %>
+
+<div class="festival_container_home">
+  <div class="section-title">
+    <h1 class="title">Festival na Mídia</h1>
+    <div class="section-title-line"> ∎ </div>
+  </div>
+  </br>
+  <div class="row">
+    <div class="col s10 m8 l8 offset-s1 offset-m2 offset-l2 ">
+    <div class="card ">
+      <ul class="list-group list-group-flush">
+        <% @midias.each do |item| %>
+          <li class="list-group-item">
+            <p style="font-size:small;margin:0px"><%=link_to item.title, item.link %></p>
+            <span style="font-color:lightgray;font-size:x-small"> <%= item.publish_at.strftime("%d/%m/%Y") %> <span><%= item.publish_by + " / " + item.local%></span></span>
+          </li>
+        <% end -%>
+
+      </ul>
+    </div>
+</div>
+</div>  </br>
+  
+</div>
+
+
+
+
+
+
+

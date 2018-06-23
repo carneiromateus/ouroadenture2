@@ -1,0 +1,27 @@
+<style type="text/css">
+  .socialmedia{
+    margin-left: 5px;
+    margin-right: 5px;
+    color: white;
+  }
+ 
+</style>
+
+<footer>
+  <div style="text-align:center;margin-bottom:30px">
+    <a target="_blank" href=<%if not @logoatv.nil?%><%if not @logoatv.first.nil?%><%= @logoatv.first.facebook%><%end%><%end%>>
+      <i class="fa fa-facebook-official fa-3x socialmedia" aria-hidden="true"></i>
+    </a>
+    <a target="_blank" href= <%if not @logoatv.nil?%><%if not @logoatv.first.nil?%><%= @logoatv.first.instagram%><%end%><%end%>>
+      <i class="fa fa-instagram fa-3x socialmedia" aria-hidden="true"></i>
+    </a>
+    <a target="_blank" href=<%if not @logoatv.nil?%><%if not @logoatv.first.nil?%><%= @logoatv.first.flickr%><%end%><%end%>>
+      <i class="fa fa-flickr fa-3x socialmedia" aria-hidden="true"></i>
+    </a>
+  </div>
+  <div class="copyright">
+	    <a href="lightupideas.com.br"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>LightUp Ideas</a> 
+		| 2017 | Todos os direitos reservados.
+		<a href=<%= new_user_session_path %> > Área Restrita </a>
+  </div>
+</footer>

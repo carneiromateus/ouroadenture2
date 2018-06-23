@@ -1,0 +1,33 @@
+<% content_for :metatags do %>
+  <meta property="robots" content="noindex, nofollow"/>
+<% end %>
+
+<% content_for :title do %>
+  <%= "Festival de Inverno | " + truncate(@category.name, length: 160) %>
+<% end %>
+
+<% content_for(:side_bar) do %>
+    <%= render :partial => "shared/sidebar_admin" %>
+<% end %>
+
+<div class="container_admin">
+  <div class="content-body" >
+
+    <div id="director_show">
+      <h5 class="title" >
+        <%= @category.name %> 
+      </h5>
+
+  
+    </div>
+   
+
+    <% if user_signed_in? %>
+      <%= link_to "Editar", edit_category_path(@category), class: "waves-effect waves-light btn" %>
+      <%= link_to "Deletar", category_path(@category), class: "waves-effect waves-light btn", method: :delete, data: {confirm: "Tem certeza desta Ação?"} %>
+    <% end %>
+  </div>
+</div>
+
+</script>
+

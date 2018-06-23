@@ -1,0 +1,22 @@
+<% content_for :title do %>
+  <%= "Festival de Inverno" %>
+<% end %>
+
+<div class="festival_container_home">
+  <div class="section-title">
+    <h1 class="title">   <%if not @colaborator.nil?%><%= @colaborator.title%><%end%> </h1>
+    <div class="section-title-line"> ∎ </div>
+  </div>
+  </br>
+  <div class="plain-text" style="width:75%;margin-left:15%;">
+    <%if not @colaborator.nil?%><%if not @colaborator.description.nil?%><%= @colaborator.description.html_safe%><%end%><%end%>
+    
+  </div>
+  </br>
+</div>
+
+
+
+
+
+

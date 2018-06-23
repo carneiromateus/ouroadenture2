@@ -1,0 +1,45 @@
+<style type="text/css">
+  .input{
+    width:200px;
+  }
+</style>
+<% content_for :metatags do %>
+  <meta property="robots" content="noindex, nofollow"/>
+<% end %>
+
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row">
+        <div class="container_login">
+            <div class="z-depth-3 card-panel">
+                <form class="login-form">
+                    
+                    <h2 class="center login-form-text title "> Área Restrita </h2>
+
+                   
+                    <div class="field-line" >
+                        <i class="fa fa-user prefix" ></i>
+                        <div class="input-field">
+                            <%= f.input :email, required: false%>
+                        </div>
+                    </div>
+            
+                    <div class="field-line">
+                        <i class="fa fa-lock prefix"></i>
+                        <div class="input-field">
+                            <%= f.input :password, required: false %>
+                        </div>
+                    </div>
+                 
+                         
+                    <div class="input-field">
+                        <%= f.button :submit, "Log in" %>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<% end %>
+
+
+
+

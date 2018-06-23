@@ -1,0 +1,57 @@
+<div class="logged_user">
+  <% if user_signed_in? %>
+
+    <p>Olá <%= current_user.name.split(" ")[0] %>,</p>
+
+    <div class="menu">
+      
+      <%= link_to "<span class=\"fa fa-user\"></span> Editar perfil".html_safe, edit_user_registration_path %>
+      |
+      <%= link_to "<span class=\"fa fa-sign-out\"></span> Sair".html_safe, destroy_user_session_path, method: :delete%>
+  </div>
+  <% else %>
+    <%= link_to "Sign in", new_user_session_path, method: :get %>
+  <% end %>
+</div>
+<hr>
+<ul class="nav navbar-nav">
+    <% if user_signed_in? %>
+        <li>
+          <a href=<%if not @logoatv.nil?%><%= logo_path(@logoatv.first.id) %><%else%>""<%end%>
+           > 
+            <span class="fa fa-gear"></span>
+            Configurações Gerais
+          </a>
+        </li>
+       
+        <li>
+          <a href=<%= news_index_path %> > 
+            <span class="fa fa-newspaper-o"></span>
+            Eventos
+          </a>
+        </li>
+        
+        </br>
+        <li>
+          <a href=<%= slides_path %> > 
+            <span class="fa fa-image"></span>
+            Slides
+          </a>
+        </li>
+        <li>
+          <a href=<%= directors_path %> > 
+            <span class="fa fa-users"></span>
+            Cardapio
+          </a>
+        </li>
+        <li>
+          <a href=<%= new_user_registration_path %> > 
+            <span class="fa fa-user"></span>
+            Criar Usuário
+          </a>
+        </li>
+
+    <% end %>
+</ul>
+
+

@@ -1,0 +1,94 @@
+// Place all the styles related to the Editals controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Place all the styles related to the editals controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.simple_form .hint{
+	margin-top:5px;
+}
+.description_edital{
+	height: 18em !important;
+}
+
+.breadcumbs-editals{
+	background-color: #26A69A;
+    padding: 5px;
+    font-size: 15px;
+    color: #fff;
+    font-weight: 200;
+    margin: -10px 0px 40px 0px;
+}
+
+.category-fixed{
+	position: fixed;	
+}
+
+ul.atividades li{
+	list-style-type: none;
+    margin: 0px;
+}
+
+.child{
+	padding: 10px;
+}
+
+.child-odd{
+	background-color: #FAFAFA;
+}
+
+.child-even{
+	background-color: #F1F1F1;
+}
+
+ul.category {
+	margin-top: 80px;
+	float: right;
+	background-color: #F1F1F1;
+	padding: 10px;
+
+	hr {
+		margin: 0px;
+		border: 0;
+	    height: 1px;
+	    background: #333;
+	    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+	}
+
+	li.category-item{
+		font-size: 15px;
+		padding-left: 15px;
+		margin: 10px 0px;
+	}
+
+	li.category-item.active{
+	    font-weight: 500;
+		border-left: 4px solid #26A69A;
+	}
+
+	li.category-item.active a{
+		color: #26A69A;
+	}
+}
+
+
+.edital_descricao{
+
+	ul.wysihtml5-toolbar{
+		margin-left: 120px;
+
+		.btn{
+			font-size: 9px;
+			padding: 0 1rem;
+			letter-spacing: 0.1px;
+    		text-shadow: none;
+    		height: 30px;
+    		line-height: 30px;
+		}
+	}
+
+	iframe.wysihtml5-sandbox{
+		margin-left: 120px !important;
+	}
+}

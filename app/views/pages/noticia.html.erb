@@ -1,0 +1,140 @@
+
+<% content_for :title do %>
+  <%= "Festival de Inverno | " + truncate(@news.title, length: 70) %>
+<% end %>
+
+<% content_for :description do %>
+  <%= truncate(strip_tags(@news.description), length: 300) %>
+<% end %>
+
+
+<div class="festival_container">
+  <div class="content-body" >
+
+    <div id="news_show">
+      <h5 class="title" >
+        <%= @news.title %> 
+      </h5>
+
+      <% if not @news.user.nil? %>
+        <p class="username">
+          Publicado por
+          <%= @news.user.name %>
+          em
+          <%=  I18n.l(@news.publish_at, format: :long) %>
+
+          <% if @news.updated_at != @news.created_at  and @news.updated_at > @news.publish_at%>
+            <br>
+            Última atualização em <%=  I18n.l(@news.updated_at, format: :long) %>
+          <% end %>
+        </p>
+      <% end %>
+
+      <% if @news.image_news.present? %>  
+        <div class="news_image_description">
+
+          <% if @news.image_news.count == 1 %>
+            <img src=<%= @news.image_news.first.url(:original) %> ></img>
+          <% else %>  
+
+            <div id="carousel-news" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+                 <% @news.image_news.each_with_index do |img, index| %>
+                  <% if index == 0 %>
+                    <li data-target="#carousel-news" data-slide-to="<%= index %>" class="active" style="background-image: url(<%= image_url(img.url(:original)) %>)">
+                    </li>
+                  <% else %>
+                    <li data-target="#carousel-news" data-slide-to="<%= index %>" style="background-image: url(<%= image_url(img.url(:original)) %>)">
+                    </li>                  
+                  <% end %>
+                <% end %>
+
+              </ol>
+
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner" role="listbox">
+                <% @news.image_news.each_with_index do |img, index| %>
+                  <% if index == 0 %>
+                    <div class="item active">
+                      <img src="<%= img.url(:original) %>" alt="...">
+                    </div>
+                  <% else %>
+                    <div class="item">
+                      <img src="<%= img.url(:original) %>" alt="...">
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <%end%>
+          <div class="legend">
+            <%= @news.subtitle %>
+          </div>
+        </div>
+      <% end %>
+      </br>
+      </br>
+
+      <% if @news.video_url.present? %>
+          <div class="flex-video widescreen">               
+            <%= embed(@news.video_url) %>
+          </div>
+      <% end %>
+      <div class="description">
+        <%= @news.description.html_safe %>
+      </div>
+    </div>
+    
+
+    <div class="row more-news">
+      <h5 class="title">Mais Notícias</h5>
+      <div class="section-title-line"> ∎ </div>
+      
+      <% @more_news.each do | news | %>
+          <div class="card" style="height:300px">
+            <div class="card-image waves-effect waves-block waves-light">
+              <% if news.image_news.present? %>
+                <img class="activator" src=<%= news.image_news.first.url(:small) %> ></img>
+              <% end %>
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4" style="font-size:14px; line-height: 28px;">
+                <b><%= news.title %></b>
+                <i class="material-icons right">more_vert</i>
+              </span>
+              <p><a href="#"><%= link_to "Ler na íntegra", noticia_path(news)  %></a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4" style="font-size:14px; line-height: 28px; ">
+                <b><%= news.title %></b>
+                <i class="material-icons right">close</i>
+              </span>
+              <div class="description">
+                <p><%= truncate(news.short_description.html_safe, length: 300, omission: ' ...')  %>
+                <a href="#"></br><%= link_to "ver mais", noticia_path(news) %></a></p>
+              </div>
+            </div>
+          </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    $('#carousel.post').carousel({
+      interval: false
+    });
+  });
+
+</script>
+
+
+
+
+
+

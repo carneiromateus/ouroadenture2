@@ -1,0 +1,46 @@
+<% content_for :metatags do %>
+  <meta property="robots" content="noindex, nofollow"/>
+<% end %>
+
+<% content_for :title do %>
+  <%= "Festival de Inverno | " + truncate(@news.title, length: 160) %>
+<% end %>
+
+<% content_for :description do %>
+  <%= truncate(@news.description, length: 300) %>
+<% end %>
+
+<% content_for(:side_bar) do %>
+    <%= render :partial => "shared/sidebar_admin" %>
+<% end %>
+
+<div class="container_admin">
+  <div class="content-body" >
+
+    <div id="news_show">
+      <h5 class="title" >
+        <%= @news.title %> 
+      </h5>
+
+      <% if not @news.user_id.nil? %> 
+        <p class="username">
+          Compartilhado por
+          <%= @news.user.name %>
+          about
+          <%= time_ago_in_words(@news.created_at) %>
+        </p>
+      <% end %>
+           
+      <div class="description">
+        <%= @news.description.html_safe %>
+      </div>
+    </div>
+   
+
+    <% if user_signed_in? %>
+      <%= link_to "Editar", edit_news_path(@news), class: "waves-effect waves-light btn" %>
+      <%= link_to "Deletar", news_path(@news), class: "waves-effect waves-light btn", method: :delete, data: {confirm: "Tem certeza desta Ação?"} %>
+    <% end %>
+  </div>
+</div>
+

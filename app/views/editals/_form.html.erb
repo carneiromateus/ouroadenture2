@@ -1,0 +1,59 @@
+<style type="text/css">
+.cke_editor_edital_description
+{
+  margin-left: 70px;
+}
+</style>
+
+<% if @edital.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger alert-dismissible" role="alert" style="width: 80%; margin: auto">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h6><%= pluralize(@edital.errors.count, "error") %> que impedem que este edital seja salvo</h6>
+ 
+    <ul>
+    <% @edital.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<%= simple_form_for @edital, html: {multipart: true} do |f| %>
+    <div class="container_admin">
+        <div class="row">
+            <div class="col s12 m12 l12 z-depth-3 card-panel">
+                <div class="center">
+
+                    <% if params[:action] == 'edit'%>
+                        <h2 class="title" style="margin: 20px 0px;">Editar Edital</h2>
+                    <% else %>
+                        <h2 class="title" style="margin: 20px 0px;">Nova Edital</h2>
+                    <% end %>
+
+                    <a ><%= image_tag("logo_h_fest_padrao_preto.png", :width => 450, :height => 100, :crop => :fill) %></a>
+                </div>
+
+                <%= f.input :pdf, as: :file, :label => "Arquivo (pdf)" %>
+
+                <%= f.input :date_published, :label => "Data de publicação", :input_html => {style: 'width: inherit'}, :hint => "Data que o edital foi publicado" %>
+                <%= f.input :date_start, :label => "Data de abertura", :input_html => {style: 'width: inherit'}, :hint => "Data que o edital será aberto, se o edital não possuir data de abertura esta data deve ser identica a data de publicação" %>
+                <%= f.input :date_end, :label => "Data de fechamento", :input_html => {style: 'width: inherit'}, :hint => "Data que o edital encerra" %>
+
+                <%= f.select :tipo_edital, ['Seleção', 'Licitação']%>
+                                          
+                <%= f.input :name, :input_html => { class: 'title_edital'}, :label => "Titulo" %>
+                          
+                <label style="margin-left:70px">*Descrição </label>
+                <%= f.cktext_area :descricao%>
+
+                 <% if params[:action] == 'edit'%>
+                    <%= f.button :submit, "Atualizar Edital" %>
+                <% else %>
+                    <%= f.button :submit, "Criar Edital", class: 'btn' %>
+                <% end %>
+
+            </div>
+        </div>
+    </div>
+<% end %>

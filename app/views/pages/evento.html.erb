@@ -1,0 +1,55 @@
+<% content_for :title do %>
+  <%= "Festival de Inverno | " + truncate(@event.name, length: 70) %>
+<% end %>
+
+<% content_for :description do %>
+  <%= truncate(strip_tags(@event.description), length: 300) %>
+<% end %>
+
+
+<div class="festival_container">
+  <div class="content-body" >
+
+    <div id="news_show">
+      <h5 class="title" >
+        <%= @event.name %> 
+      </h5>
+
+      <% if @event.image.present? %>  
+        <div class="news_image_description">
+          <img src=<%= @event.image.url(:original) %> ></img>
+        </div>      
+      <% end %>
+       <div class="description">
+        <%if not @event.date_end.nil? %>
+          <% if @event.date_end > @event.publish_at %>
+            <p>Data de Início: <%=(I18n.l(@event.publish_at, format: :date1)) %></p>
+            <p>Data de Término: <%=(I18n.l(@event.date_end, format: :date1)) %></p>
+          <%end%>
+        <%else%>
+            <p>Data: <%=(I18n.l(@event.publish_at, format: :date1)) %></p>
+          <% end %>
+        <p>Horário: <%= @event.publish_at.strftime('%-H:%M') %></p>
+        <p>Local: <%= @event.location %></p>
+      </div>
+      
+      <div class="description">
+        <%= @event.description.html_safe %>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+
+</script>
+
+
+
+
+
+

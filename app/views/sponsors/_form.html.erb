@@ -1,0 +1,45 @@
+<% if @sponsor.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger alert-dismissible" role="alert" style="width: 80%; margin: auto">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h6><%= pluralize(@sponsor.errors.count, "error") %> que impedem que este patrocinador seja salvo</h6>
+ 
+    <ul>
+    <% @sponsor.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<%= simple_form_for @sponsor, html: {multipart: true} do |f| %>
+    <div class="container_admin">
+        <div class="row">
+            <div class="col s12 m12 l12 z-depth-3 card-panel">
+                <div class="center">
+
+                    <h5 class="titulo" style="margin: 20px 0px;">Patrocinador</h5>
+
+                    <a ><%= image_tag("logo_h_fest_padrao_preto.png", :width => 450, :height => 100, :crop => :fill) %></a>
+                </div>
+
+                <%= f.input :image, as: :file, label: "Logo(150x150)" %>
+
+                <%= f.input :size, as: :boolean, boolean_style: :inline, label: "400x150?"%>
+                <%= f.input :name, label: "Nome" %>
+
+                <%= f.input :link, label: "Link" %>
+
+
+                <%= f.input :order, label: "Ordem" %>
+
+
+				<% if params[:action] == 'edit'%>
+                    <%= f.button :submit, "Atualizar Patrocinador" %>
+                <% else %>
+                    <%= f.button :submit, "Criar Patrocinador", class: 'btn' %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+<% end %>

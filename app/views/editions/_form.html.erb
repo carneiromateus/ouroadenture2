@@ -1,0 +1,60 @@
+<style type="text/css">
+.cke_editor_edition_description
+{
+  margin-left: 70px;
+}
+
+</style>
+
+<% if @edition.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger alert-dismissible" role="alert" style="width: 80%; margin: auto">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h6><%= pluralize(@edition.errors.count, "error") %> que impedem que esta notícia seja salva</h6>
+ 
+    <ul>
+    <% @edition.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<%= simple_form_for @edition , html: {multipart: true}  do |f| %>
+    <div class="container_admin">
+        <div class="row">
+            <div class="col s12 m12 l12 z-depth-3 card-panel">
+                <div class="center">
+                    <% if params[:action] == 'edit'%>
+                        <h2 class="title" style="margin: 20px 0px;">Editar Edição</h2>
+                    <% else %>
+                        <h2 class="title" style="margin: 20px 0px;">Nova Edição</h2>
+                    <% end %>
+                    <a ><%= image_tag("logo_h_fest_padrao_preto.png", :width => 450, :height => 100, :crop => :fill) %></a>
+                </div>
+
+               <label>Imagem (200x200)</label>
+                <%= file_field_tag "images[]", type: :file, multiple: false, :label => "Imagem" %>
+
+                <%= f.input :year, :label => "Ano da Edição",as: :date ,:order => [:year], :input_html => {style: 'width: inherit'}  %>
+
+                <%= f.input :local, :label  => "Link"  %>
+
+                <%= f.input :tema, :label => "Tema  (max 180) " %>
+
+                <label>Descrição </label>
+                <%= f.cktext_area :description %>
+                
+                <% if params[:action] == 'edit'%>
+                    <%= f.button :submit, "Atualizar Edição" %>
+                <% else %>
+                    <%= f.button :submit, "Criar Edição", class: 'btn' %>
+                <% end %>
+                </br>
+
+
+            </div>
+        </div>
+    </div>
+<% end -%>
+

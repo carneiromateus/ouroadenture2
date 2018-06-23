@@ -1,0 +1,49 @@
+<% content_for :metatags do %>
+  <meta property="robots" content="noindex, nofollow"/>
+<% end %>
+
+<% content_for(:side_bar) do %>
+    <%= render :partial => "shared/sidebar_admin" %>
+<% end %>
+
+<% if resource.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger alert-dismissible" role="alert" style="width: 80%; margin: auto">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h6><%= pluralize(resource.errors.count, "error") %> que impedem que este usuário seja editado</h6>
+ 
+    <ul>
+    <% resource.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+  <div class="container_admin edit-user">
+        <div class="row">
+            <div class="col s12 m12 l12 z-depth-3 card-panel" style="height:100%">
+                <div class="center">
+
+                    <h2 class="title" style="margin: 20px 0px;">Criar Usuário</h2>
+
+                    <a ><%= image_tag("logo_h_fest_padrao_preto.png", :width => 450, :height => 100, :crop => :fill) %></a>
+                </div>
+
+               <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+                  <div class="form-inputs">
+
+                    <%= f.input :name, required: true, autofocus: true, label: "Nome" %>
+                    <%= f.input :email, required: true, label: "Email" %>
+                    <%= f.input :password, required: true, hint: ("Mínimo de #{@minimum_password_length} dígitos" if @minimum_password_length), label: "Senha" %>
+                    <%= f.input :password_confirmation, required: true, label: "Confirmação de senha" %>
+
+                  </div>
+
+                  <div class="form-actions">
+                    <%= f.button :submit, "Criar usuário" %>
+                  </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+

@@ -1,0 +1,48 @@
+<% content_for :metatags do %>
+  <meta property="robots" content="noindex, nofollow"/>
+<% end %>
+
+<% content_for :title do %>
+  <%= "Festival de Inverno | Admin - Edições" %>
+<% end %>
+
+<% content_for(:side_bar) do %>
+    <%= render :partial => "shared/sidebar_admin" %>
+<% end %>
+<div class="container_admin">
+  <div class="row">
+    <div class="col s12 m12 l12 z-depth-3 card-panel">
+      <div class="center">
+
+      </br>
+        <%= link_to 'Nova Edição', new_edition_path, :class=>"btn btn-small",:style => "float :left"  %>
+      </br>
+
+       <h4 class="title">Edições</h4>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Ano</th>
+              <th>Link</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @editions.each do |edition| %>
+              <tr>
+                <td><%= edition.year.strftime("%Y") %></td>
+                <td><%= edition.local %></td>
+                <td><%= link_to("<i class='fa fa-eye'></i>".html_safe, edition, :title => 'Visualizar')%></td>
+                <td><%= link_to( "<i class='fa fa-edit'></i>".html_safe, edit_edition_path(edition), :title => 'Editar' )%></td>
+                <td><%=link_to( "<i class='fa fa-trash'></i>".html_safe, edition, :method => :delete, :data => { :confirm => 'Tem certeza que deseja apagar?' }, :title => 'Excluir' )%></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        
+      </div>
+    </div>
+  </div>
+</div>

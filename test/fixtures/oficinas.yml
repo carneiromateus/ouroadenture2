@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  descripton: MyString
+  value: 1.5
+  start_at: 2017-07-02 07:57:23
+  finish_at: 2017-07-02 07:57:23
+  vacancies: 1
+
+two:
+  name: MyString
+  descripton: MyString
+  value: 1.5
+  start_at: 2017-07-02 07:57:23
+  finish_at: 2017-07-02 07:57:23
+  vacancies: 1

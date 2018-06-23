@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Savassinha Bar - UFOP</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <% if not @logoatv.nil?%>
+      <%if  not @logoatv.first.nil? %>
+        <%= favicon_link_tag @logoatv.first.favi.url %> 
+      <%end%>
+    <% end %>
+
+
+    
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <%= csrf_meta_tags %>
+
+    <script source="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application'%>
+   
+  </head>
+
+  <body>
+
+    
+    <%= render "shared/navbar" %>
+     <div>
+      <%if content_for?(:side_bar)%>
+          <div id="side-content">
+            <%=yield(:side_bar)%>
+          </div>
+          <div id="main-content">
+            <% if flash[:notice] %>
+              <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <%= notice %>
+              </div>
+            <%end%>
+
+            <% if flash[:alert] %>
+              <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <%= alert %>
+              </div>
+            <%end%>
+          </div>
+      <%end%>
+    </div>
+    
+    <%= yield %>
+    <%= render "shared/footer" %>
+  </body>
+</html>

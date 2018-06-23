@@ -1,0 +1,11 @@
+<% content_for :metatags do %>
+  <meta property="robots" content="noindex, nofollow"/>
+<% end %>
+
+<% content_for(:side_bar) do %>
+    <%= render :partial => "shared/sidebar_admin" %>
+<% end %>
+
+<div class="festival_container_home">
+	<%= render 'form' %>
+</div>

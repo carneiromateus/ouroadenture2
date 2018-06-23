@@ -1,0 +1,42 @@
+
+<% if @conection.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger alert-dismissible" role="alert" style="width: 80%; margin: auto">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h6><%= pluralize(@conection.errors.count, "error") %> que impedem que esta conexão seja salva</h6>
+ 
+    <ul>
+    <% @conection.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<%= simple_form_for(@conection) do |f| %>
+  <%= f.error_notification %>
+<div class="container_admin">
+        <div class="row">
+            <div class="col s12 m12 l12 z-depth-3 card-panel">
+                <div class="center">
+
+                    <h5 class="titulo" style="margin: 20px 0px;">Conexão Festival</h5>
+
+                    <a ><%= image_tag("logo_h_fest_padrao_preto.png", :width => 450, :height => 100, :crop => :fill) %></a>
+                </div>
+
+                <h3>Título</h3>
+                <%= f.input :title,  label: "Título" %>
+                <label style="margin-left:70px">*Descrição </label>
+                <%= f.cktext_area :description %>
+
+        	    <% if params[:action] == 'edit'%>
+                    <%= f.button :submit, "Atualizar Conexão" %>
+                <% else %>
+                    <%= f.button :submit, "Criar Conexão", class: 'btn' %>
+                <% end %>
+
+            </div>
+        </div>
+    </div>
+<% end %>

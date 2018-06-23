@@ -1,0 +1,55 @@
+<% if @logo.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger alert-dismissible" role="alert" style="width: 80%; margin: auto">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h6><%= pluralize(@logo.errors.count, "error") %> que impedem que este logo seja salvo</h6>
+ 
+    <ul>
+    <% @logo.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+<%= simple_form_for(@logo) do |f| %>
+  <%= f.error_notification %>
+<div class="container_admin">
+        <div class="row">
+            <div class="col s12 m12 l12 z-depth-3 card-panel">
+                <div class="center">
+
+                    <h5 class="titulo" style="margin: 20px 0px;">Configurações Gerais</h5>
+
+                   
+                </div>
+
+                <h3>Logos</h3>
+                    <%= f.input :image, type: :file, label: "Navbar 350(max)x64" %>
+                   
+                    <%= f.input :favi, type: :file, label: "Favicon 16x16"  %>
+
+        		    <%= select("logo", "status", ['ativo','inativo'], {include_blank: true}) %>
+        		<h3>Media Social(links)</h3>
+                    <%=f.input :flickr,  label: "Flickr" %>
+                    <%=f.input :facebook,  label: "Facebook" %>
+                    <%=f.input :instagram,  label: "Instagram" %>
+            
+                    <%=f.input :estaEdicaoTitle,  label: "Título" %>
+                    <label style="margin-left:70px">*Descrição </label>
+                    <%= f.cktext_area :estaEdicaoDesc%>
+                <h3>Página "Contato"</h3>
+                    <label style="margin-left:70px">*Descrição </label>
+                    <%= f.cktext_area :contatoEnd%>
+
+                <%= f.button :submit %>
+
+            </div>
+        </div>
+    </div>
+<% end %>

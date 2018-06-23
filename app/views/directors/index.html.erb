@@ -1,0 +1,49 @@
+<% content_for :metatags do %>
+  <meta property="robots" content="noindex, nofollow"/>
+<% end %>
+
+<% content_for :title do %>
+  <%= "Savassinha | Admin - Pratos" %>
+<% end %>
+
+<% content_for(:side_bar) do %>
+    <%= render :partial => "shared/sidebar_admin" %>
+<% end %>
+<div class="container_admin">
+  <div class="row">
+    <div class="col s12 m12 l12 z-depth-3 card-panel">
+      <div class="center">
+
+      </br>
+        <%= link_to 'Novo Prato', new_director_path, :class=>"btn btn-small",:style => "float :left"  %>
+      </br>
+
+       <h4 class="title">Prato</h4>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Ordem</th>
+              <th>Nome</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @directors.each do |director| %>
+              <tr>
+                <td><%= director.order %></td>
+                <td><%= director.name %></td>
+                <td><%= director.link %></td>
+                <td><%= link_to("<i class='fa fa-eye'></i>".html_safe, director, :title => 'Visualizar')%></td>
+                <td><%= link_to( "<i class='fa fa-edit'></i>".html_safe, edit_director_path(director), :title => 'Editar' )%></td>
+                <td><%=link_to( "<i class='fa fa-trash'></i>".html_safe, director, :method => :delete, :data => { :confirm => 'Tem certeza que deseja apagar?' }, :title => 'Excluir' )%></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        
+      </div>
+    </div>
+  </div>
+</div>

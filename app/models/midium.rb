@@ -1,0 +1,2 @@
+class Midium < ApplicationRecord
+end

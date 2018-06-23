@@ -1,0 +1,107 @@
+<style type="text/css">
+  @media only screen and (max-width : 992px) {
+    .slider .caption h3{
+      font-size: 15px;
+    }
+    .slider .caption h5{
+      font-size: 10px;
+    }
+    .paginate{
+      width: 50%!important;
+    }
+  }
+
+</style>
+
+<% content_for :title do %>
+  <%= "Festival de Inverno" %>
+<% end %>
+
+
+<div class="festival_container_home">
+  <div class="row">
+
+    <h2 class="title">Notícias</h2>
+    <div class="section-title-line"> ∎ </div>
+
+    <ul class="card-festival" style="margin:auto">
+      <% @news.each do |item| %>
+
+        <li class="card-festival-item">
+          <div class="card-festival-content">
+            <div class="card-festival-title">
+              <%= link_to item.title, noticia_path(item) %>
+            </div>
+            <div class="card-festival-img">
+              <% if item.video_url.present? %>
+                <div class="flex-video widescreen">               
+                  <%= embed(item.video_url) %>
+                </div>
+              <% else %>
+                <% if item.image_news.present? %>
+                  <%= link_to image_tag(item.image_news.first.url(:medium)), noticia_path(item) %>
+                <% end %>
+              <% end%>
+            <div>
+         
+              <div class="card-festival-date">
+                Publicado em <%= item.publish_at.strftime("%d/%m/%Y") %>
+              </div> 
+              <hr class="line-item"> </hr>
+              <div class="card-festival-description">
+                <%= truncate(strip_tags(item.description), length: 144, omission: '...') { link_to " Leia mais",noticia_path(item)}%>
+              </div> 
+           </div>
+        </li>
+        
+      <% end -%>
+    </ul>
+  </div>
+  <div class="paginate" >
+    <%= will_paginate @news, :previous_label => 'Seguinte', :next_label => 'Próximo' %>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  ;( function( $, window, document, undefined )
+  {
+      'use strict';
+   
+      var $list       = $( '.card-festival' ),
+          $items      = $list.find( '.card-festival-content' ),
+          setHeights  = function()
+          {
+              $items.css( 'height', 'auto' );
+   
+              var perRow = Math.floor( $list.width() / $items.width() );
+              if( perRow == null || perRow < 2 ) return true;
+   
+              for( var i = 0, j = $items.length; i < j; i += perRow )
+              {
+                  var maxHeight   = 0,
+                      $row        = $items.slice( i, i + perRow );
+   
+                  $row.each( function()
+                  {
+                      var itemHeight = parseInt( $( this ).outerHeight() );
+                      if ( itemHeight > maxHeight ) maxHeight = itemHeight;
+                  });
+                  $row.css( 'height', maxHeight );
+              }
+          };
+   
+      setHeights();
+      $( window ).on( 'resize', setHeights );
+   
+  })( jQuery, window, document );
+
+  jQuery(document).ready(function(){
+
+    $('.slider').slider({
+      indicators: true,
+      interval: 10000,
+    });
+  });
+</script>
+

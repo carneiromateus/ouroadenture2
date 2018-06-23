@@ -1,0 +1,51 @@
+<% content_for :metatags do %>
+  <meta property="robots" content="noindex, nofollow"/>
+<% end %>
+
+<% content_for :title do %>
+  <%= "Festival de Inverno | Admin - Patrocinadores" %>
+<% end %>
+
+<% content_for(:side_bar) do %>
+    <%= render :partial => "shared/sidebar_admin" %>
+<% end %>
+<div class="container_admin">
+  <div class="row">
+    <div class="col s12 m12 l12 z-depth-3 card-panel">
+      <div class="center">
+
+      </br>
+        <%= link_to 'Novo Patrocinador', new_sponsor_path, :class=>"btn btn-small",:style => "float :left"  %>
+      </br>
+
+       <h4 class="title">Patrocinadores</h4>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Ordem</th>
+              <th>Nome</th>
+              <th>400x150?<th>
+              <th>Link</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @sponsors.each do |sponsor| %>
+              <tr>
+                <td><%= sponsor.order %></td>
+                <td><%= sponsor.name %></td>
+                <td><%= sponsor.size %></td>
+                <td><%= sponsor.link %></td>
+                <td><%= link_to("<i class='fa fa-eye'></i>".html_safe, sponsor, :title => 'Visualizar')%></td>
+                <td><%= link_to( "<i class='fa fa-edit'></i>".html_safe, edit_sponsor_path(sponsor), :title => 'Editar' )%></td>
+                <td><%=link_to( "<i class='fa fa-trash'></i>".html_safe, sponsor, :method => :delete, :data => { :confirm => 'Tem certeza que deseja apagar?' }, :title => 'Excluir' )%></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        
+      </div>
+    </div>
+  </div>
+</div>

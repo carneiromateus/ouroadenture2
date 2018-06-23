@@ -1,0 +1,165 @@
+// Place all the styles related to the News controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#news_show {
+	margin: auto;
+	max-width: 700px;
+	text-align: justify;
+	margin-top: 80px;
+
+	.title{
+		text-align: center;
+		font-family: 'Oswald', sans-serif;
+        letter-spacing: 1.0px;
+        font-size: 30px;
+        color: #51565b;
+        margin: 40px 0px 20px 0px
+	}
+
+	blockquote{
+		border-color: #51565b;
+	}
+
+	.left, .right{
+		background-image: none;
+
+		i{
+			position: absolute;
+			top: 45%;
+			color: rgba(0,0,0,0.7);
+		}
+	}
+
+
+	#carousel-news ol {  
+		bottom: 0;
+
+		li{
+			width: 30px;
+			height: 30px;
+			border-radius: 0px;
+			list-style: none;
+			background-size: contain;
+		}
+	}
+
+
+	.left i{
+		left: 0px;
+	}
+
+	.news_image_description {
+		max-width: 700px;
+		text-align: center;
+		position: relative;
+		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+
+		img{
+			margin: auto;
+			max-height: 500px;
+			width: 100%;
+		}
+
+		.legend{
+			background-color: #51565b;
+		    padding: 10px;
+		    color: white;
+		    font-weight: 100;
+		    letter-spacing: 1.4;
+		}
+
+		iframe{
+			width: 100%;
+		    min-height: 400px;
+		    position: relative;
+		    top: 0;
+		    left: 0;
+		}
+	}
+	
+	.username {
+		color: #969696;
+		margin: -10px 0px 20px 0px;
+	}
+
+	.description {
+		color: #212121;
+		margin: 50px auto;
+		font-size: 14px;
+
+		p { 
+			font-weight: 300;
+			font-size: 17px;
+		}
+
+		img{
+			max-width: 100%;
+		}
+		
+	}
+}
+
+.more-news{
+		width: 100%;
+		.card{
+			border-radius: 15px;
+			width:29%;
+			float:left;
+			margin-left:25px;
+		}
+		h5{
+			color: #51565b;
+			text-transform: none;
+			margin-right: 5%;
+			margin-left: 5%;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			font-size:20px;
+		}
+
+}	
+@media only screen and (max-width : 900px) {
+  			.more-news{
+    			display:none; 
+  			}
+		}
+
+	
+.news_description, .news_short_description{
+
+	ul.wysihtml5-toolbar{
+		margin-left: 120px;
+
+		.btn{
+			font-size: 9px;
+			padding: 0 10px;
+			letter-spacing: 0.1px;
+    	text-shadow: none;
+    	height: 30px;
+    	margin-right: 2px;
+    	line-height: 30px;
+		}
+	}
+
+	iframe.wysihtml5-sandbox{
+		margin-left: 120px !important;
+	}
+}
+
+.news_featured {
+	[type="checkbox"] + label:before{
+		right: -20px;
+		left: initial;
+	}
+}
+
+.btn{
+	background-color:#51565b;
+	width: auto;
+}
+
+.btn:hover{
+	background-color:#c7ccd3;
+	width: auto;
+}

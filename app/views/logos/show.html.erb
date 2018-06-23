@@ -1,0 +1,77 @@
+<% content_for :metatags do %>
+  <meta property="robots" content="noindex, nofollow"/>
+<% end %>
+
+<% content_for :title do %>
+  <%= "Savassinha"%>
+<% end %>
+
+<% content_for(:side_bar) do %>
+    <%= render :partial => "shared/sidebar_admin" %>
+<% end %>
+
+<div class="container_admin">
+  <div class="content-body" >
+
+    <div id="news_show" class="row col s 6">
+    	<h3>Logos</h3>
+    	</br>
+    	<div class="col s 3">
+	    	<h4>Navbar</h4>
+	    	<%= image_tag @logo.image.url%>
+	   	</div>
+	    <div class="col s 6">
+	    	<h4>Favicon</h4>
+	        <%= image_tag @logo.favi.url %>
+	    </div>
+    </div>
+    <div id="news_show">
+    	<h3>Media Social</h3>
+    	</br>
+    <% if not @logo.facebook.nil? %>
+    	<div class="description">
+	    	<%="Facebook:" + @logo.facebook%>
+	   	</div>
+	<%end%>
+	<% if not @logo.instagram.nil? %>
+	    <div class="description">
+	    	<%="Instagram:" + @logo.instagram%>
+	   	</div>
+	<%end%>
+	<% if not @logo.flickr.nil? %>
+	    <div class="description">
+	    	<%="Flickr:" + @logo.flickr%>
+	   	</div>
+    </div>
+    <%end%>
+   	<div id="news_show">    	</br>
+    	<div class="description">
+	    	<h4>Título</h4>
+	    	<%= @logo.estaEdicaoTitle%>
+	   	</div>
+	    <div class="description">
+	    	<h4>Descrição </h4>
+        <%if  @logo.estaEdicaoTitle.present? %>
+	    	  <%= @logo.estaEdicaoTitle.html_safe%>
+        <%end%>
+	    </div>
+    </div>
+    <div id="news_show" class="row col s 6">
+    	<h3>Contato</h3>
+    	</br>
+    <% if not @logo.contatoEnd.nil? %>
+     	<div class="description">
+	    	<h4>Descrição </h4>
+	    	<%=@logo.contatoEnd.html_safe%>
+	    </div>
+		
+    </div>
+    <%end%>
+
+
+    <% if user_signed_in? %>
+      <%= link_to "Editar", edit_logo_path(@logo), class: "waves-effect waves-light btn" %>
+    <% end %>
+  </div>
+</div>
+

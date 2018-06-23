@@ -1,0 +1,51 @@
+<% if @category.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger alert-dismissible" role="alert" style="width: 80%; margin: auto">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h6><%= pluralize(@category.errors.count, "error") %> que impedem que esta categoria seja salva</h6>
+ 
+    <ul>
+    <% @category.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= simple_form_for @category , html: {multipart: true}  do |f| %>
+    <div class="container_admin">
+        <div class="row">
+            <div class="col s12 m12 l12 z-depth-3 card-panel">
+                <div class="center">
+                    <% if params[:action] == 'edit'%>
+                        <h2 class="title" style="margin: 20px 0px;">Editar Categoria</h2>
+                    <% else %>
+                        <h2 class="title" style="margin: 20px 0px;">Nova Categoria</h2>
+
+                    <% end %>
+
+                     <a ><%= image_tag("logo_h_fest_padrao_preto.png", :width => 450, :height => 100, :crop => :fill) %></a>
+                </div>
+
+                
+                <%= f.input :name, :label => "Título" %>
+                
+
+                <script>
+	          $(function() {
+	              $('#cp2').colorpicker();
+	          });
+        </script>
+               
+
+                <% if params[:action] == 'edit'%>
+                    <%= f.button :submit, "Atualizar Categoria" %>
+                <% else %>
+                    <%= f.button :submit, "Criar Categoria", class: 'btn' %>
+                <% end %>
+                </br>
+
+
+            </div>
+        </div>
+    </div>
+<% end -%>

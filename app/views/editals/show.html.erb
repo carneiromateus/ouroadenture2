@@ -1,0 +1,102 @@
+<% content_for :metatags do %>
+  <meta property="robots" content="noindex, nofollow"/>
+<% end %>
+
+<% content_for :title do %>
+  <%= "Festival de Inverno | Admin - " + truncate(@edital.name, length: 160) %>
+<% end %>
+
+<% content_for :description do %>
+  <%= truncate(@edital.descricao, length: 300) %>
+<% end %>
+
+<% content_for(:side_bar) do %>
+    <%= render :partial => "shared/sidebar_admin" %>
+<% end %>
+
+<div class="container_admin">
+  <div class="content-body" >
+
+    <div id="project_show">
+      <div class="row">
+
+        <!-- Colocar o vídeo nesta div que ocupa a tela inteira -->
+        <div class="col s12" style="text-align: center">
+          <h5 class="title" style="font-size: 22px; margin-bottom: 0px">
+            <%= @edital.name %> 
+          </h5>
+          <p class="username" style="margin: 5px 0px 30px 0px">
+            Criado em
+            <%= @edital.created_at.strftime("%d/%m/%Y - %H:%M") %>
+
+            <% if @edital.updated_at != @edital.created_at %>
+              <span style="margin: 0px 10px">|</span>
+              Atualizado em <%= @edital.updated_at.strftime("%d/%m/%Y - %H:%M") %>
+            <% end %>
+          </p>
+
+        </div>
+
+        <div class="col s5 offset-s1">
+          <div class="col-marger">
+
+             <div class="description" >
+              <h4 class="title" style="text-align:left!important" >
+                Situação
+              </h4>
+                <% if @edital.date_start <= Date.today and @edital.date_end >= Date.today %>
+                  Aberto
+                <% elsif @edital.date_start > Date.today%>
+                  Em breve
+                <% else%>
+                  Fechado
+                <% end %>
+            </div>
+
+            <div class="description">
+              <h4 class="title" style="text-align:left!important">
+                Descrição
+              </h4>
+              <%= simple_format(@edital.descricao) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s6">
+          <div class="col-marger">
+            <div class="description">
+              <h4 class="title" style="text-align:left!important">
+                Data de publicação
+              </h4>
+                <%= l(@edital.date_published, format: '%d de %B de %Y') %>
+            </div>
+            </br>
+
+            <div class="description">
+              <h4 class="title"style="text-align:left!important" >
+                Data de Abertura
+              </h4>
+                <%= l(@edital.date_start, format: '%d de %B de %Y') %>
+            </div>
+
+            </br>
+            <div class="description">
+              <h4 class="title"style="text-align:left!important" >
+                Data de Encerramento
+              </h4>
+                <%= l(@edital.date_end, format: '%d de %B de %Y') %>
+            </div>
+            </br>
+            <div class="description">
+              <h4 class="title" style="text-align:left!important">
+                Baixar edital
+              </h4>
+              <%= link_to "Download".html_safe, @edital.pdf.url(:original, false), target: "_blank", :class => "btn btn-smalls" %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

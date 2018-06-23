@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<!-- 
+  Theme Name: Resto
+  Theme URL: https://probootstrap.com/resto-free-restaurant-responsive-bootstrap-website-template
+  Author: ProBootstrap.com
+  Author URL: https://probootstrap.com
+  License: Released for free under the Creative Commons Attribution 3.0 license (probootstrap.com/license)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ProBootstrap:Resto &mdash; Free Bootstrap Theme, Free Restaurant Responsive Bootstrap Website Template</title>
+    <meta name="description" content="Free Bootstrap Theme by ProBootstrap.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Pinyon+Script" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles-merged.css">
+    <link rel="stylesheet" href="css/style.min.css">
+
+    <!--[if lt IE 9]>
+      <script src="js/vendor/html5shiv.min.js"></script>
+      <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    
+    <!-- Fixed navbar -->
+ 
+
+    <section class="flexslider" data-section="welcome">
+      <ul class="slides">
+      <% @slides.each.with_index do |item, i| %>
+        <li style="background-image: url(<%= item.image(:original)%>)" class="overlay" data-stellar-background-ratio="0.5">
+        
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2">
+                <div class="probootstrap-slider-text text-center probootstrap-animate probootstrap-heading">
+                  <h1 class="primary-heading"><%= link_to item.subtitle, item.link, :class => "caption", target: :_blank %></h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      <%end%>
+      </ul>
+    </section>
+
+    <section class="probootstrap-section probootstrap-bg-white">
+      <div class="container">
+        <div class="row">
+            <div class="probootstrap-heading dark">
+              <h1 align="center" class="primary-heading">Nossa Historia</h1>
+              <span align="center" class="seperator">* * *</span>
+            </div>
+            <p>
+        <%if not @logoatv.nil?%><%if not @logoatv.first.estaEdicaoDesc.nil?%><%= @logoatv.first.estaEdicaoDesc.html_safe%><%end%><%end%>
+         </p>
+        <!-- END row -->
+      </div>
+      </div>
+    </section>
+
+
+    
+
+    
+    <section class="probootstrap-section-bg overlay" style="background-image: url(img/hero_bg_4.jpg);"  data-stellar-background-ratio="0.5" data-section="events">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center probootstrap-animate">
+            <div class="probootstrap-heading">
+              <h2 class="primary-heading">Eventos</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="probootstrap-section">
+      <div class="container">
+        <div class="row">
+            <% @news.each do |item| %>
+
+          <div class="col-md-4 col-sm-4 probootstrap-animate">
+              <div class="probootstrap-block-image">
+                <figure><% if item.video_url.present? %>
+                <div class="flex-video widescreen">               
+                  <%= embed(item.video_url) %>
+                </div>
+              <% else %>
+                <% if item.image_news.present? %>
+                  <%= link_to image_tag(item.image_news.first.url(:medium)), noticia_path(item) %>
+                <% end %>
+              <% end%></figure>
+                <div class="text">
+                  <span class="date"><%= item.publish_at.strftime("%d/%m/%Y") %></span>
+                  <h3><%= link_to item.title, noticia_path(item) %></h3>
+                  <p><%= item.short_description.html_safe%></p>
+                  <p class=""><a href="<%=noticia_path(item)%>#" class="probootstrap-custom-link link-sm">saiba mais</a></p>
+                </div>
+              </div>
+            </div>
+           <%end%> 
+          
+        </div>
+      </div>
+    </section>
+
+   <section class="probootstrap-section-bg overlay" style="background-image: url(img/hero_bg_4.jpg);"  data-stellar-background-ratio="0.5"  data-section="menu">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center probootstrap-animate">
+            <div class="probootstrap-heading">
+              <h2 class="primary-heading">Nosso Menu</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="probootstrap-section probootstrap-bg-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="menus">
+            <% @directors.each do |item|%>
+              <li>
+                <figure class="image"><%= image_tag item.image.url(:original) %></figure>
+                <div class="text">
+
+                  <h3><%=item.name.html_safe%></h3>
+                  <p><%=item.link.html_safe%></p>
+                </div>
+              </li>
+            <%end%>
+             
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="probootstrap-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 probootstrap-animate">
+            <div class="probootstrap-footer-widget">
+              <h3>Localização</h3>
+              <div class="row">
+                <div class="col-md-6">
+                  <p> 
+Rua Professor Paulo Maganhães Gomes 257
+35400000 <br> Ouro Preto - MG</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+      </div>
+    </section>
+    
+
+    <script src="js/scripts.min.js"></script>
+    <script src="js/custom.min.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<% content_for :metatags do %>
+  <meta property="robots" content="noindex, nofollow"/>
+<% end %>
+
+<% content_for :title do %>
+  <%= "Festival de Inverno | " + truncate(@slide.title, length: 160) %>
+<% end %>
+
+<% content_for :description do %>
+  <%= truncate(@slide.subtitle, length: 300) %>
+<% end %>
+
+<% content_for(:side_bar) do %>
+    <%= render :partial => "shared/sidebar_admin" %>
+<% end %>
+
+<div class="container_admin">
+  <div class="content-body" >
+
+    <div id="slide_show">
+      <h5 class="title" >
+        <%= @slide.title %> 
+      </h5>
+
+      <div class="description">
+        <%= @slide.subtitle.html_safe %>
+      </div>
+    </div>
+   
+
+    <% if user_signed_in? %>
+      <%= link_to "Editar", edit_slide_path(@slide), class: "waves-effect waves-light btn" %>
+      <%= link_to "Deletar", slide_path(@slide), class: "waves-effect waves-light btn", method: :delete, data: {confirm: "Tem certeza desta Ação?"} %>
+    <% end %>
+  </div>
+</div>
+
+</script>
+

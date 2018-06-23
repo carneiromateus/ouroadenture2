@@ -1,0 +1,103 @@
+<style type="text/css">
+.wrapper{
+  margin: 0 auto;
+  padding: 40px;
+  max-width: 800px;
+}
+
+.table{
+  margin: 0 0 40px 0;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  display: table;
+}
+@media screen and (max-width: 580px){
+	.table{
+	display: block;
+}
+.cell{
+	 padding: 2px 12px;
+    display: block;
+}
+
+.edital_table{
+	padding: 8px 0;
+	display: block;
+}
+
+}
+.edital_table{
+  display: table-row;
+  background: #f6f6f6;
+ 
+}
+.header{
+    font-weight: 900;
+    color: #ffffff;
+    background: #51565b!important;
+}
+.edital_table .green{
+   background: #27ae60;
+}
+.edital_table .blue{
+    background: #2980b9;
+ }
+   
+
+.edital_table:nth-of-type(odd){
+    background: #e9e9e9;
+}
+.cell{
+  	padding: 6px 12px;
+  	display: table-cell;
+}
+</style>
+<% content_for :title do %>
+  <%= "Festival de Inverno | " %>
+<% end %>
+
+
+
+
+<div class="festival_container">
+	<h2 class="title">Editais de Licitação</h2>
+    <div class="section-title-line"> ∎ </div>
+	<div class="wrapper">
+	  	<div class="table">
+	        <div class="row edital_table header">
+		      
+		      <div class="cell">
+		        Data de Publicação
+		      </div>
+		      <div class="cell">
+		        Nome
+		      </div>
+		      <div class="cell">
+		        Situação
+		      </div>
+		      <div class="cell">
+		        Download
+		      </div>
+		    </div>
+		    <% @editals.each do |edital|%>
+			    <div class="row edital_table">
+				    <div class="cell">
+				    	<%= edital.date_published.strftime("%d/%m/%Y") %>
+				    </div>
+				    <div class="cell">
+						<%= link_to edital.name, edit_path(edital) %>
+				    </div>
+				    <div class="cell">
+				        <%= (edital.date_start <= Date.today and edital.date_end >= Date.today) ? 'Aberto' : (edital.date_start > Date.today) ? 'Em Breve' : 'Fechado'	%> 
+				    </div>
+			    	<div class="cell">
+			    		<%= link_to( "<i class='fa fa-download'></i>".html_safe, edital.pdf.url(:original, false), target: "_blank"  ) %>
+					</div>	    	
+			    </div>
+			<% end %>
+		</div>
+    </div>
+</div>
+<div class="paginate" >
+	<%= will_paginate @editals, :previous_label => 'Seguinte', :next_label => 'Próximo' %>
+</div>

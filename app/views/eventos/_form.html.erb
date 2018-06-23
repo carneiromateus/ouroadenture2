@@ -1,0 +1,67 @@
+<style type="text/css">
+    .checkbox input[type="checkbox"]{
+        opacity:1!important;
+        left: -427px!important;
+        margin-top:-5px;
+    }
+</style>
+<% if @evento.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger alert-dismissible" role="alert" style="width: 80%; margin: auto">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h6><%= pluralize(@evento.errors.count, "error") %> que impedem que esta Evento seja salva</h6>
+ 
+    <ul>
+    <% @evento.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= simple_form_for @evento , html: {multipart: true}  do |f| %>
+    <div class="container_admin">
+        <div class="row">
+            <div class="col s12 m12 l12 z-depth-3 card-panel">
+                <div class="center">
+                    <% if params[:action] == 'edit'%>
+                        <h2 class="title" style="margin: 20px 0px;">Editar Evento (João Monlevade)</h2>
+                    <% else %>
+                        <h2 class="title" style="margin: 20px 0px;">Novo Evento (João Monlevade)</h2>
+
+                    <% end %>
+
+                    <a ><%= image_tag("logo_h_fest_padrao_preto.png", :width => 450, :height => 100, :crop => :fill) %></a>
+                </div>
+
+                <%= f.file_field :image%>
+
+                
+                <%= f.input :publish_at, :label => "Data de Início",as: :datetime, :order => [:day, :month, :year, :hour, :minute ], :input_html => {style: 'width: inherit'}  %>
+                
+                <%= f.input :date_end, :label => "Data de Término",as: :datetime, :order => [:day, :month, :year, :hour, :minute ], :input_html => {style: 'width: inherit'}  %>
+                
+                <label>Categoria:</label>
+
+                <%= f.association :categories,   as: :check_boxes, label: false%>
+                <%=link_to "Editar Categorias",categories_path%>
+
+                <%= f.input :name, :label => "Título" %>
+                <%= f.input :location, :label => "Endereço" %>
+               
+                <label>*Descrição </label>
+                <%= f.cktext_area :description %>
+                
+
+                <% if params[:action] == 'edit'%>
+                    <%= f.button :submit, "Atualizar Evento" %>
+                <% else %>
+                    <%= f.button :submit, "Criar Evento", class: 'btn' %>
+                <% end %>
+                </br>
+
+
+            </div>
+        </div>
+    </div>
+<% end -%>
+
