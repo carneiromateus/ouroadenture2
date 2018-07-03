@@ -1,33 +1,75 @@
 
 
+<style type="text/css">
+  
+  nav{
+    background-color: #06454A;
+  }
+  .nav-container{
+    background-color: #09585D;
+  }
+  .navbar-collapse{
+    padding-right: 25%;
+  }
+  .navbar-collapse{
+    padding-right: 25%!important;
+  }
+  .navbar-header{
+    padding-left: 25%;
+  }
+  li > a:hover{
+    background-color:rgba(0,0,0,0)!important;
+  }
+  nav ul li.active{
+    background-color:rgba(0,0,0,0)!important
+  }
+  nav ul li.active > div.arrow-up {
+    width: 0; 
+    height: 0px; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;    
+    border-bottom: 15px solid #06454A;
+    position: absolute;
+    margin-top: -15px;
+    margin-left: 38%;
+  }
+  a:active {
+    background-color:rgba(0,0,0,0)!important;
+  }
+  a:focus {
+    background-color:rgba(0,0,0,0)!important;
+    outline: 0;
+    color:white!important;
+  }
+  .arrow-up {
+    width: 0; 
+    height: 0px; 
+  }
+</style>
 
-</script> 
- <nav class="navbar navbar-default navbar-fixed-top probootstrap-navbar">
-      <div class="container">
-        <div class="navbar-header">
-          <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button> -->
-          <% if not @logoatv.nil? %> 
-            <% if not @logoatv.first.nil? %>
-              <a class="brand-logo" href="<%= root_url %>">
-                <%= image_tag(@logoatv.first.image.url,  :class => "brand-logo")  %>
-              </a>
-            <% end %>
-          <% end %>
-        </div>
+<nav class="navbar-fixed-top">
+  <div class="nav-container">
+    <div class="navbar-header">
+      <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button> -->
+          <a class="brand-logo" href="<%= root_url %>">
+            <%= image_tag('logo.jpg',  :class => "brand-logo")  %>
+          </a>
+    </div>
 
-        <div id="navbar-collapse" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="#" data-nav-section="welcome">Bem Vindo</a></li>
-            <li><a href="#" data-nav-section="events">Eventos</a></li>
-            <li><a href="#" data-nav-section="menu">Menu</a></li>
-            <!-- <li><a href="#" data-nav-section="reservation">Reservation</a></li> -->
-            
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <div id="navbar-collapse" class="navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="#" data-nav-section="welcome">Home</a><div class="arrow-up"></div></li>
+        
+        <li><a href="#" data-nav-section="events">Como funciona</a><div class="arrow-up"></div></li>
+        <li><a href="#" data-nav-section="menu">Roteiros</a><div class="arrow-up"></div></li>
+        <li><a href="#" data-nav-section="menu">Translados</a><div class="arrow-up"></div></li>
+        <li><a href="#" data-nav-section="menu">Contato</a><div class="arrow-up"></div></li>            
+      </ul>
+    </div>
+  </div>
+</nav>
