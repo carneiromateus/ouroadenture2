@@ -8,6 +8,7 @@ class PagesController < ApplicationController
 		@slides = Slide.all.order(order: :asc)
 		@directors = Director.all.order(order: :asc)
 		@sponsors = Sponsor.all.order(order: :asc)
+    @user = User.first
 	end
 	def midia
 	    @last_year= DateTime.new(Time.zone.now.year, 1, 1)
@@ -146,5 +147,6 @@ class PagesController < ApplicationController
     @directors = Director.all.order(order: :asc)
     @sponsors = Sponsor.all.order(order: :asc)
     @logo = Logo.last
+    @user = User.first
   end
 end

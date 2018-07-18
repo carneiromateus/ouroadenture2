@@ -19,9 +19,9 @@
                 <div class="center">
 
                      <% if params[:action] == 'edit'%>
-                        <h2 class="title" style="margin: 20px 0px;">Editar Prato</h2>
+                        <h2 class="title" style="margin: 20px 0px;">Editar Aitividade</h2>
                     <% else %>
-                        <h2 class="title" style="margin: 20px 0px;">Novo Prato</h2>
+                        <h2 class="title" style="margin: 20px 0px;">Nova Atividade</h2>
                     <% end %>
 
                 </div>
@@ -35,9 +35,9 @@
                 <%= f.input :order, label: "Ordem" %>
 
 				<% if params[:action] == 'edit'%>
-                    <%= f.button :submit, "Atualizar Prato" %>
+                    <%= f.button :submit, "Atualizar Atividade" %>
                 <% else %>
-                    <%= f.button :submit, "Criar Prato", class: 'btn' %>
+                    <%= f.button :submit, "Criar Atividade", class: 'btn' %>
                 <% end %>
             </div>
         </div>
