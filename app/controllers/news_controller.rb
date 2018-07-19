@@ -21,6 +21,7 @@ class NewsController < ApplicationController
 
   # GET /news/1/edit
   def edit
+    @activities = Director.all
   end
 
   # POST /news

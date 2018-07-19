@@ -15,10 +15,12 @@ class EditionsController < ApplicationController
   # GET /editions/new
   def new
     @edition = Edition.new
+    @activities = Director.all
   end
 
   # GET /editions/1/edit
   def edit
+    @activities = Director.all
   end
 
   # POST /editions
@@ -90,6 +92,6 @@ class EditionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def edition_params
-      params.require(:edition).permit(:title,:short_description,  :year, :local, :tema, :description, :link)
+      params.require(:edition).permit(:title,:short_description,  :year, :local, :tema, :description, :link,  director_ids: [])
     end
 end

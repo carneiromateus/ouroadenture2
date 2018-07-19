@@ -8,6 +8,7 @@ gem "pagseguro-oficial"
 gem 'ckeditor'
 gem 'isotope-rails', '~> 2.2', '>= 2.2.2'
 gem 'owlcarousel2-rails'
+gem 'flex-slider-rails'
 
 gem 'will_paginate', '~> 3.1.0'
 
