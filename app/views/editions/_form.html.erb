@@ -26,15 +26,15 @@
             <div class="col s12 m12 l12 z-depth-3 card-panel">
                 <div class="center">
                     <% if params[:action] == 'edit'%>
-                        <h2 class="title" style="margin: 20px 0px;">Editar Edição</h2>
+                        <h2 class="title" style="margin: 20px 0px;">Editar Translado</h2>
                     <% else %>
-                        <h2 class="title" style="margin: 20px 0px;">Nova Edição</h2>
+                        <h2 class="title" style="margin: 20px 0px;">Nova Transado</h2>
                     <% end %>
                     <a ><%= image_tag("logo_h_fest_padrao_preto.png", :width => 450, :height => 100, :crop => :fill) %></a>
                 </div>
 
                <label>Imagem (200x200)</label>
-                <%= file_field_tag "images[]", type: :file, multiple: false, :label => "Imagem" %>
+                <%= file_field_tag "images[]", type: :file, multiple: true, :label => "Imagem" %>
 
                 <%= f.input :year, :label => "Ano da Edição",as: :date ,:order => [:year], :input_html => {style: 'width: inherit'}  %>
 
@@ -44,6 +44,9 @@
 
                 <label>Descrição </label>
                 <%= f.cktext_area :description %>
+
+                <label>Descrição curta</label>
+                <%= f.cktext_area :short_description %>
                 
                 <% if params[:action] == 'edit'%>
                     <%= f.button :submit, "Atualizar Edição" %>

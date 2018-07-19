@@ -90,6 +90,6 @@ class EditionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def edition_params
-      params.require(:edition).permit(:title, :year, :local, :tema, :description, :link)
+      params.require(:edition).permit(:title,:short_description,  :year, :local, :tema, :description, :link)
     end
 end
