@@ -13,7 +13,7 @@
  
     <ul>
     <% @edition.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+      <li style="margin-top: 10%"><%= msg %></li>
     <% end %>
     </ul>
   </div>
@@ -28,9 +28,8 @@
                     <% if params[:action] == 'edit'%>
                         <h2 class="title" style="margin: 20px 0px;">Editar Translado</h2>
                     <% else %>
-                        <h2 class="title" style="margin: 20px 0px;">Nova Transado</h2>
+                        <h2 class="title" style="margin: 20px 0px;">Nova Translado</h2>
                     <% end %>
-                    <a ><%= image_tag("logo_h_fest_padrao_preto.png", :width => 450, :height => 100, :crop => :fill) %></a>
                 </div>
 
                <label>Imagem (200x200)</label>

@@ -5,7 +5,7 @@
  
     <ul>
     <% @sponsor.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+      <li style="margin-top: 10%"><%= msg %></li>
     <% end %>
     </ul>
   </div>
@@ -18,12 +18,11 @@
             <div class="col s12 m12 l12 z-depth-3 card-panel">
                 <div class="center">
 
-                    <h5 class="titulo" style="margin: 20px 0px;">Patrocinador</h5>
+                    <h5 class="titulo" style="margin: 40px 0px;">Atividade</h5>
 
-                    <a ><%= image_tag("logo_h_fest_padrao_preto.png", :width => 450, :height => 100, :crop => :fill) %></a>
                 </div>
 
-                <%= f.input :image, as: :file, label: "Logo(150x150)" %>
+                <%= f.input :image, type: :file, label: "Logo (200x200)" %>
 
                 <%= f.input :size, as: :boolean, boolean_style: :inline, label: "400x150?"%>
                 <%= f.input :name, label: "Nome" %>
@@ -35,9 +34,9 @@
 
 
 				<% if params[:action] == 'edit'%>
-                    <%= f.button :submit, "Atualizar Patrocinador" %>
+                    <%= f.button :submit, "Atualizar Atividade" %>
                 <% else %>
-                    <%= f.button :submit, "Criar Patrocinador", class: 'btn' %>
+                    <%= f.button :submit, "Criar Atividade", class: 'btn' %>
                 <% end %>
             </div>
         </div>
