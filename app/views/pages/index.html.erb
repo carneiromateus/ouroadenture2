@@ -56,6 +56,19 @@
   .slides li {
     position: relative;
   }
+  .main_container .flexslider{
+    margin:0;
+  }
+  .how_works{
+    background-color: #9B9740;
+    color:white;
+  }
+  .golden-border{
+    top:0;
+    width: 100%;
+    height:25px;
+    background-color: #838036;
+  }
   @media only screen and (max-width: 600px) {
     .flex-caption-title{
       display: none;
@@ -68,6 +81,16 @@
       display: none;
     }
 
+  }
+  .image-center{
+    text-align: center;
+  }
+  .thumb_75{
+    width:75px;
+    margin-top:5px;
+  }
+  .primary-heading{
+    font-weight:bold;
   }
 </style>
 <div class="main_container">
@@ -90,18 +113,42 @@
     </ul>
   </section>
 
-  <section class="probootstrap-section probootstrap-bg-white">
+  <section class="probootstrap-section how_works">
+    <div class="golden-border"></div>
     <div class="container">
       <div class="row">
-          <div class="probootstrap-heading dark">
-            <h1 align="center" class="primary-heading">Nossa Historia</h1>
-            <span align="center" class="seperator">* * *</span>
+        <div class="probootstrap-heading justify-content">
+          <div class="image-center">
+            <image src="<%= image_url('11.png')%>" align="center" class="thumb_75"/>
           </div>
-          <p>
-      <%if not @logoatv.nil?%><%if not @logoatv.first.estaEdicaoDesc.nil?%><%= @logoatv.first.estaEdicaoDesc.html_safe%><%end%><%end%>
-       </p>
-      <!-- END row -->
-    </div>
+          <h1 align="center" class="primary-heading">Como Funciona</h1>
+          <p align="center" class="col-md-6 col-md-offset-3">Lorem ipsum vivamus nam cras convallis elit risus praesent non consectetur purus lacus aliquet, integer velit massa ultrices consequat duis commodo ultrices class porta turpis elementum. quisque scelerisque feugiat nunc quis porta morbi varius </span>
+        </div>
+        <div class="col-md-12" style="margin:30px 0;">
+          <div class="col-md-2 col-md-offset-2 justify"> 
+            <div class="image-center">
+              <img src="<%= image_url('7.png')%>" class="thumb_75"/>
+            </div>
+            <p class='col-12'>Lorem ipsum vivamus nam cras conva elit risus prae sent non con sec purus lacus aliquet, inte er velit massa ult rices conseq uat duis comm odo nam cras </p>
+          </div>
+          <div class="col-md-2 col-md-offset-1 justify"> 
+            <div class="image-center">
+              <img src="<%= image_url('6.png')%>" class="thumb_75"/>
+            </div>
+            <p class='col-12'>Lorem ipsum vivamus nam cras conva elit risus prae sent non con sec purus lacus aliquet, inte er velit massa ult rices conseq uat duis comm odo nam cras </p>
+          </div>
+          <div class="col-md-2 col-md-offset-1 justify"> 
+            <div class="image-center">
+              <img src="<%= image_url('10.png')%>" class="thumb_75"/>
+            </div>
+            <p class='col-12'>Lorem ipsum vivamus nam cras conva elit risus prae sent non con sec purus lacus aliquet, inte er velit massa ult rices conseq uat duis comm odo nam cras </p>
+          </div>
+        </div>
+        <p>
+          <%if not @logoatv.nil?%><%if not @logoatv.first.estaEdicaoDesc.nil?%><%=  @logoatv.first.estaEdicaoDesc.html_safe%><%end%><%end%>
+        </p>
+        <!-- END row -->
+      </div>
     </div>
   </section>
 
