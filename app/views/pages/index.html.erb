@@ -92,6 +92,98 @@
   .primary-heading{
     font-weight:bold;
   }
+  .roteiros{
+    background-color: white;
+    color:#09585D;
+  }
+  .about{
+    background-color: #09585D;
+    color:white;
+  }
+   .darker-border{
+    background-color: #06454A;
+  }
+  .img-roteiro{
+    border:8px solid #9B9740;
+    padding:0;
+    height:200px;
+    background-size: 100%;
+    background-position: center;
+  }
+  .txt-roteiro{
+    margin-top:5px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .txt-roteiro > a{
+    color:#9B9740;
+  }
+  .description-roteiro{
+    font-size:12px;
+    font-weight: 100;
+    color:#06454A;
+    text-align: justify;
+  }
+  .text > p{
+    font-size:13px;
+    font-weight: 100;
+    color:#06454A;
+    text-align: justify;
+  }
+  .know_more{
+    border:4px solid #9B9740;
+    padding:2px 15px;
+  }
+  .know_more a{
+    text-transform: none;
+    text-decoration: none;
+    color:#9B9740 ;
+  }
+  
+  .img-translado{
+    border:8px solid white;
+    padding:0;
+    height:200px;
+    background-size: 100%;
+    background-position: center;
+  }
+  .txt-translado{
+    margin-top:5px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .txt-translado > a{
+    color:white;
+  }
+  .description-translado{
+    font-size:12px;
+    font-weight: 100;
+    color:white;
+    text-align: justify;
+  }
+  .text_translado > p{
+    font-size:13px;
+    font-weight: 100;
+    color:white;
+    text-align: justify;
+  }
+  .know_more_translado{
+    border:4px solid white;
+    padding:2px 15px;
+    background-color:#9B9740;
+  }
+  .know_more_translado a{
+    text-transform: none;
+    text-decoration: none;
+    color:white ;
+  }
+  .about-title{
+    color:white;
+    margin-top:0px;
+  }
+  .about-description{
+    color:white;
+  }
 </style>
 <div class="main_container">
   
@@ -113,7 +205,7 @@
     </ul>
   </section>
 
-  <section class="probootstrap-section how_works">
+  <section class="probootstrap-section how_works" data-section="how_works">
     <div class="golden-border"></div>
     <div class="container">
       <div class="row">
@@ -143,112 +235,114 @@
             </div>
             <p class='col-12'>Lorem ipsum vivamus nam cras conva elit risus prae sent non con sec purus lacus aliquet, inte er velit massa ult rices conseq uat duis comm odo nam cras </p>
           </div>
-        </div>
-        <p>
-          <%if not @logoatv.nil?%><%if not @logoatv.first.estaEdicaoDesc.nil?%><%=  @logoatv.first.estaEdicaoDesc.html_safe%><%end%><%end%>
-        </p>
-        <!-- END row -->
+        </div>       
       </div>
     </div>
   </section>
-
-
-  
-
-  
-  <section class="probootstrap-section-bg overlay" style="background-image: url(img/hero_bg_4.jpg);"  data-stellar-background-ratio="0.5" data-section="events">
+  <section class="probootstrap-section roteiros" data-section="roteiros">
     <div class="container">
       <div class="row">
-        <div class="col-md-12 text-center probootstrap-animate">
-          <div class="probootstrap-heading">
-            <h2 class="primary-heading">Eventos</h2>
+        <div class="probootstrap-heading justify-content">
+          <div class="image-center">
+            <image src="<%= image_url('13.png')%>" align="center" class="thumb_75"/>
           </div>
+          <h1 align="center" class="primary-heading">Roteiros</h1>
+          <p align="center" class="col-md-6 col-md-offset-3">Lorem ipsum vivamus nam cras convallis elit risus praesent non consectetur purus lacus aliquet, integer velit massa ultrices consequat duis commodo ultrices class porta turpis elementum. quisque scelerisque feugiat nunc quis porta morbi varius </span>
         </div>
-      </div>
-    </div>
-  </section>
-  <section class="probootstrap-section">
-    <div class="container">
-      <div class="row">
-          <% @news.each do |item| %>
+        <div class="col-md-12" style="margin:30px 0;">
+          <% @news.each_slice(2) do |slice| %>
 
-        <div class="col-md-4 col-sm-4 probootstrap-animate">
-            <div class="probootstrap-block-image">
-              <figure><% if item.video_url.present? %>
-              <div class="flex-video widescreen">               
-                <%= embed(item.video_url) %>
-              </div>
-            <% else %>
-              <% if item.image_news.present? %>
-                <%= link_to image_tag(item.image_news.first.url(:medium)), noticia_path(item) %>
-              <% end %>
-            <% end%></figure>
-              <div class="text">
-                <span class="date"><%= item.publish_at.strftime("%d/%m/%Y") %></span>
-                <h3><%= link_to item.title, noticia_path(item) %></h3>
-                <p><%= item.short_description.html_safe%></p>
-                <p class=""><a href="<%=noticia_path(item)%>#" class="probootstrap-custom-link link-sm">saiba mais</a></p>
-              </div>
+          <div class="col-md-4 col-md-offset-2 justify"> 
+            <div class="image-center img-roteiro" style="background-image: url(<%=slice[0].image_news.first.url(:medium)%>)">           
+            </div>
+            <div class="text ">
+              <h3 class="txt-roteiro"><%= link_to slice[0].title, noticia_path(slice[0]) %></h3>
+              <p class="description-roteiro"><%= slice[0].short_description.html_safe.truncate(200, :omission => "...") %></p>
+              <button class="btn_flat know_more"><a href="<%=noticia_path(slice[0])%>#" class="link-sm">Saiba mais</a></button>
+            </div>
+           <!--  <p class='col-12'>Lorem ipsum vivamus nam cras conva elit risus prae sent non con sec purus lacus aliquet, inte er velit massa ult rices conseq uat duis comm odo nam cras </p> -->
+          </div>
+          <div class="col-md-4 justify"> 
+            <div class="image-center img-roteiro" style="background-image: url(<%=slice[0].image_news.first.url(:medium)%>)">             
+            </div>  
+            <div class="text">
+              <h3  class="txt-roteiro"><%= link_to slice[1].title, noticia_path(slice[1]) %></h3>
+              <p class="description-roteiro"><%= slice[1].short_description.html_safe.truncate(200, :omission => "...") %></p>
+              <button class="btn_flat know_more"><a href="<%=noticia_path(slice[1])%>#" class="link-sm">Saiba mais</a></button>
             </div>
           </div>
-         <%end%> 
-        
-      </div>
-    </div>
-  </section>
-
- <section class="probootstrap-section-bg overlay" style="background-image: url(img/hero_bg_4.jpg);"  data-stellar-background-ratio="0.5"  data-section="menu">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center probootstrap-animate">
-          <div class="probootstrap-heading">
-            <h2 class="primary-heading">Nosso Menu</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="probootstrap-section probootstrap-bg-white">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <ul class="menus">
-          <% @directors.each do |item|%>
-            <li>
-              <figure class="image"><%= image_tag item.image.url(:original) %></figure>
-              <div class="text">
-
-                <h3><%=item.name.html_safe%></h3>
-                <p><%=item.link.html_safe%></p>
-              </div>
-            </li>
           <%end%>
-           
-          </ul>
-        </div>
+        </div>          
       </div>
     </div>
   </section>
-
-  <section class="probootstrap-footer">
+    <section class="probootstrap-section how_works" data-section="tranlados">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 probootstrap-animate">
-          <div class="probootstrap-footer-widget">
-            <h3>Localização</h3>
-            <div class="row">
-              <div class="col-md-6">
-                <p> 
-Rua Professor Paulo Maganhães Gomes 257
-35400000 <br> Ouro Preto - MG</p>
-              </div>
+        <div class="probootstrap-heading justify-content">
+          <div class="image-center">
+            <image src="<%= image_url('13.1.png')%>" align="center" class="thumb_75"/>
+          </div>
+          <h1 align="center" class="primary-heading">Translados</h1>
+          <p align="center" class="col-md-6 col-md-offset-3">Lorem ipsum vivamus nam cras convallis elit risus praesent non consectetur purus lacus aliquet, integer velit massa ultrices consequat duis commodo ultrices class porta turpis elementum. quisque scelerisque feugiat nunc quis porta morbi varius </span>
+        </div>
+         <div class="col-md-12" style="margin:30px 0;">
+          <% @news.each_slice(2) do |slice| %>
+
+          <div class="col-md-4 col-md-offset-2 justify"> 
+            <div class="image-center img-translado" style="background-image: url(<%=slice[0].image_news.first.url(:medium)%>)">           
+            </div>
+            <div class="text-translado ">
+              <h3 class="txt-translado"><%= link_to slice[0].title, noticia_path(slice[0]) %></h3>
+              <p class="description-translado"><%= slice[0].short_description.html_safe.truncate(200, :omission => "...") %></p>
+              <button class="btn_flat know_more_translado"><a href="<%=noticia_path(slice[0])%>#" class="link-sm">Saiba mais</a></button>
+            </div>
+           <!--  <p class='col-12'>Lorem ipsum vivamus nam cras conva elit risus prae sent non con sec purus lacus aliquet, inte er velit massa ult rices conseq uat duis comm odo nam cras </p> -->
+          </div>
+          <div class="col-md-4 justify"> 
+            <div class="image-center img-translado" style="background-image: url(<%=slice[0].image_news.first.url(:medium)%>)">             
+            </div>  
+            <div class="text-translado">
+              <h3  class="txt-translado"><%= link_to slice[1].title, noticia_path(slice[1]) %></h3>
+              <p class="description-translado"><%= slice[1].short_description.html_safe.truncate(200, :omission => "...") %></p>
+              <button class="btn_flat know_more_translado"><a href="<%=noticia_path(slice[1])%>#" class="link-sm">Saiba mais</a></button>
             </div>
           </div>
-        </div>
-        
+          <%end%>
+        </div> 
+      </div>
     </div>
   </section>
+  </section>
+    <section class="probootstrap-section about" data-section="about">
+    <div class="golden-border darker-border"></div>
+    <div class="container">
+      <div class="row">
+        <div class="probootstrap-heading justify-content">
+          <div class="image-center">
+            <image src="<%= image_url('12.png')%>" align="center" class="thumb_75"/>
+          </div>
+          <h1 align="center" class="primary-heading">Sobre o Ouro Adventure</h1>
+        </div>
+         <div class="col-md-12" style="margin:30px 0;">
+
+          <div class="col-md-4 col-md-offset-2 justify"> 
+            <div class="image-center">
+              <image src="<%= image_url('01.jpg')%>" align="center" class="col-md-12"/>
+            </div>            
+          </div>
+          <div class="col-md-4 justify">             
+
+            <h3  class="about-title">Texto sobre a empresa</h3>
+            <p class="about-description">Lorem ipsum vivamus nam cras conva elit risus prae sent non con sec purus lacus aliquet, inte er velit massa ult rices conseq uat duis comm odo nam cras Lorem ipsum vivamus nam cras conva elit risus prae sent non con sec purus lacus aliquet, inte er velit massa ult rices conseq uat duis comm odo nam cras</p>
+
+
+          </div>
+        </div> 
+      </div>
+    </div>
+  </section> 
+  
 </div>
 <script type="text/javascript" charset="utf-8">
   $(window).load(function() {
