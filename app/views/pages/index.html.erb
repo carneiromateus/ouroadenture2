@@ -133,13 +133,19 @@
   .know_more{
     border:4px solid #9B9740;
     padding:2px 15px;
+    background-color: white;
+  }
+  .know_more:hover{
+    border-color:#6c692c;
+    color:#6c692c;
+    background-color: white;
   }
   .know_more a{
     text-transform: none;
     text-decoration: none;
     color:#9B9740 ;
   }
-  
+ 
   .img-translado{
     border:8px solid white;
     padding:0;
@@ -172,6 +178,10 @@
     padding:2px 15px;
     background-color:#9B9740;
   }
+  .know_more_translado:hover{
+    background-color:#6c692c;    
+  }
+
   .know_more_translado a{
     text-transform: none;
     text-decoration: none;
@@ -184,6 +194,32 @@
   .about-description{
     color:white;
   }
+  .arrow-right {
+    width: 0; 
+    height: 0; 
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;    
+    border-left: 12px solid #063B3E;
+    float: right;
+    margin-top: 2px;
+    margin-left: 10px;
+    color: #063B3E;
+  }
+  .all-link{
+    float: right;
+    margin-top: 40px;
+    font-weight: 700;
+    font-size: 12px;
+    color: #063B3E;
+    cursor: pointer;
+  }
+  .blank{
+    color:white;
+  }
+  .blank .arrow-right {
+    border-left-color: white;
+  }
+
 </style>
 <div class="main_container">
   
@@ -270,10 +306,12 @@
               <p class="description-roteiro"><%= slice[1].short_description.html_safe.truncate(200, :omission => "...") %></p>
               <button class="btn_flat know_more"><a href="<%=noticia_path(slice[1])%>#" class="link-sm">Saiba mais</a></button>
             </div>
+            <a class="all-link" href="#">Todos os roteiros <div class="arrow-right"></div></a>         
           </div>
           <%end%>
-        </div>          
+        </div> 
       </div>
+
     </div>
   </section>
     <section class="probootstrap-section how_works" data-section="tranlados">
@@ -307,6 +345,7 @@
               <p class="description-translado"><%= slice[1].short_description.html_safe.truncate(200, :omission => "...") %></p>
               <button class="btn_flat know_more_translado"><a href="<%=noticia_path(slice[1])%>#" class="link-sm">Saiba mais</a></button>
             </div>
+            <a class="all-link blank" href="#">Todos os roteiros <div class="arrow-right"></div></a>        
           </div>
           <%end%>
         </div> 
