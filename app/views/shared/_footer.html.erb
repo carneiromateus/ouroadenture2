@@ -4,24 +4,106 @@
     margin-right: 5px;
     color: white;
   }
- 
-</style>
+  .top-footer{
+    min-height:345px;
+  }
+  .footer-description{
+    margin:20px 0;
+  }
+  .contact-col h3{
+    font-weight: bold;
+    margin:20px 0;
+  }
+  .contact-col p{
+    font-size:12px;
+    margin: 0 0 15px;
+  }
+  .first-col,
+  .contact-col{
+    border-right: 1px solid rgba(0,0,0,0.1);
+  }
+  .menu-col h5{
+    font-weight: bold;
+    margin:26px 0;
+  }
+  .menu-col a{
+    font-size:12px;
+    margin: 0 0 15px;
+    color:white;
+    text-align: left;
+  }
+  .menu-col a:hover{
+    color:white;
+  }
+  footer{
+    padding:30px 0 0 0 ;
+  }
+  .bottom-content{
+    text-align: left;
+    height:55px;
+    padding:20px 0;
+    margin-top:40px;
+    background-color: rgba(0,0,0,.3);
+  }
+  @media only screen and (max-width: 600px) {
+    .bottom-content{
+      height: 85px;
+    }
+    .first-col,
+    .contact-col{
+      border-right: 0px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
 
-<footer>
-  <div style="text-align:center;margin-bottom:30px">
-    <a target="_blank" href=<%if not @logoatv.nil?%><%if not @logoatv.first.nil?%><%= @logoatv.first.facebook%><%end%><%end%>>
-      <i class="fa fa-facebook-official fa-3x socialmedia" aria-hidden="true"></i>
-    </a>
-    <a target="_blank" href= <%if not @logoatv.nil?%><%if not @logoatv.first.nil?%><%= @logoatv.first.instagram%><%end%><%end%>>
-      <i class="fa fa-instagram fa-3x socialmedia" aria-hidden="true"></i>
-    </a>
-    <a target="_blank" href=<%if not @logoatv.nil?%><%if not @logoatv.first.nil?%><%= @logoatv.first.flickr%><%end%><%end%>>
-      <i class="fa fa-flickr fa-3x socialmedia" aria-hidden="true"></i>
-    </a>
+    }
+  }
+</style>
+<footer class="top-footer">
+   <div class="col-md-12">
+    <div class="col-md-3 col-md-offset-1 center first-col">
+      <%= image_tag('logo.jpg',  :class => "logo")  %>
+      <p class="col-md-12 justify footer-description">Lorem ipsum vivamus nam cras conva elit risus prae sent non con sec purus lacus aliquet, inte er velit</p>
+      <div class="col-sm-12">
+        <div class="col-sm-4" style="text-align:left">
+          <a target="_blank" href=<%if not @logoatv.nil?%><%if not @logoatv.first.nil?%><%= @logoatv.first.facebook%><%end%><%end%>>
+            <i class="fa fa-facebook-official fa-2x socialmedia" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="col-sm-4 center">
+          <a target="_blank" href= <%if not @logoatv.nil?%><%if not @logoatv.first.nil?%><%= @logoatv.first.instagram%><%end%><%end%>>
+            <i class="fa fa-skype fa-2x socialmedia" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="col-sm-4" style="text-align:right"> 
+          <a target="_blank" href=<%if not @logoatv.nil?%><%if not @logoatv.first.nil?%><%= @logoatv.first.flickr%><%end%><%end%>>
+            <i class="fa fa-whatsapp  fa-2x socialmedia" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 center contact-col" >
+      <h3> (31)3551-1234</h3>
+      <p>Celular:(31)98765-1234</p>
+      <p>Horário de atendimento: 09:00 - 18:00</p>
+      <p>Rua Fictícia, 100 - Centro</p>
+      <h3> Ouro Preto - MG </h3>
+
+    </div>
+    <div class="col-md-3 menu-col" > 
+      <h5> MENU</h5>
+      <p><a href="/">Home</a></p>
+      <p><a href="/">Roteiros</a></p>
+      <p><a href="/">Contato</a></p>
+      <p><a href="/"> Mais informações </a></p>
+
+    </div>
+
   </div>
-  <div class="copyright">
-	    <a href="lightupideas.com.br"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>LightUp Ideas</a> 
-		| 2017 | Todos os direitos reservados.
-		<a href=<%= new_user_session_path %> > Área Restrita </a>
+  <div class="col-md-12 bottom-content">
+    <div class="col-md-11 col-md-offset-1">
+	    <a href="http://www.lightupideas.com.br"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>LightUp Ideas</a> 
+		  | 2018 | Todos os direitos reservados.
+      <a href="<%= new_user_session_path %>" class="right" > Área Restrita </a>
+    </div>
+		
   </div>
 </footer>
