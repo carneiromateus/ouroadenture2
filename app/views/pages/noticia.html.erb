@@ -1,4 +1,63 @@
+<style type="text/css">
 
+  .roteiro-carousel .carousel-indicators{
+    bottom:20%;
+  }
+  .roteiro-carousel .legend{
+    margin-bottom:-50px;
+    padding:15px;
+    color:white;
+    font-size:15px;
+    font-weight: bold;
+    z-index: 2;
+    box-shadow: inset 0 50px 9px -7px rgba(0,0,0,0.3);
+    position: relative;
+  }
+  .categories{
+    background-color:#9B9740;
+  }
+  .categories .title{
+    margin-top:20px;
+    color:#7A7732;
+    font-size:17px;
+    font-weight: bold;
+  }
+  .categories .description{
+    color:#c3c08c;
+    font-size:12px;
+    text-align: center
+  }
+  .roteiro{
+    background-color: white;
+    padding-top: 20px;
+  }
+  .roteiro .title{
+    color:#9B9740;
+    font-size: 20px;
+    font-weight:bold;
+    text-transform: uppercase;
+    text-align: left;
+
+  }
+  .roteiro .description{
+    font-size: 14px;
+  }
+  .roteiro .bold{
+    font-weight: 
+  }
+  .roteiro .att{
+    margin:5px 0;
+    padding:0;
+  }
+  .roteiro .first-image{
+    width:100%;
+    border:8px solid #9B9740;
+    padding:0;
+    height:250px;
+    background-size: 100% 100%;
+    background-position: center;
+  }
+</style>
 <% content_for :title do %>
   <%= "Ouro Adventure | " + truncate(@news.title, length: 70) %>
 <% end %>
@@ -7,93 +66,175 @@
   <%= truncate(strip_tags(@news.description), length: 300) %>
 <% end %>
 
+<div class="top-container" style="background-image:url('<%=image_url('back_photo2.jpg') %>') ">
+  <image src="<%= image_url('13.1.png')%>" align="center" class="thumb_115"/>
+  <h3 align="center" class="primary-heading"><%= @news.title %></h3>
+</div>
 
-<div class="festival_container">
-  <div class="content-body" >
-
-    <div id="news_show">
-      <h5 class="title" >
-        <%= @news.title %> 
-      </h5>
-
-      <% if not @news.user.nil? %>
-        <p class="username">
-          Publicado por
-          <%= @news.user.name %>
-          em
-          <%=  I18n.l(@news.publish_at, format: :long) %>
-
-          <% if @news.updated_at != @news.created_at  and @news.updated_at > @news.publish_at%>
-            <br>
-            Última atualização em <%=  I18n.l(@news.updated_at, format: :long) %>
-          <% end %>
-        </p>
-      <% end %>
-
-      <% if @news.image_news.present? %>  
-        <div class="news_image_description">
-
-          <% if @news.image_news.count == 1 %>
-            <img src=<%= @news.image_news.first.url(:original) %> ></img>
-          <% else %>  
-
-            <div id="carousel-news" class="carousel slide" data-ride="carousel">
-              <!-- Indicators -->
-              <ol class="carousel-indicators">
-                 <% @news.image_news.each_with_index do |img, index| %>
-                  <% if index == 0 %>
-                    <li data-target="#carousel-news" data-slide-to="<%= index %>" class="active" style="background-image: url(<%= image_url(img.url(:original)) %>)">
-                    </li>
-                  <% else %>
-                    <li data-target="#carousel-news" data-slide-to="<%= index %>" style="background-image: url(<%= image_url(img.url(:original)) %>)">
-                    </li>                  
-                  <% end %>
-                <% end %>
-
-              </ol>
-
-              <!-- Wrapper for slides -->
-              <div class="carousel-inner" role="listbox">
-                <% @news.image_news.each_with_index do |img, index| %>
-                  <% if index == 0 %>
-                    <div class="item active">
-                      <img src="<%= img.url(:original) %>" alt="...">
-                    </div>
-                  <% else %>
-                    <div class="item">
-                      <img src="<%= img.url(:original) %>" alt="...">
-                    </div>
-                  <% end %>
-                <% end %>
-              </div>
-            </div>
-          <%end%>
-          <div class="legend">
-            <%= @news.subtitle %>
+<section class="probootstrap-section roteiro">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-6">
+          <h6 class="title"><%= @news.title %></h6>     
+          <div class="att col-md-12 left">
+            <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
+            <span class="description"><b>Duração:</b>Saída às 9h, retorno ás 18h</span>
           </div>
+          <div class="att col-md-12 left">
+            <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
+            <span class="description"><b>Local:</b>Nome do Local</span>
+          </div>  
+          <div class="att col-md-12 left">
+            <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
+            <span class="description"><b>Valor:</b>210,00</span>
+          </div>
+          <div class="att col-md-12 left">
+            <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
+            <span class="description"><b>Datas:</b>30/05</span>
+          </div> 
+          <div class="description">
+            <%= @news.short_description.html_safe %>
+          </div>
+        
         </div>
-      <% end %>
-      </br>
-      </br>
-
-      <% if @news.video_url.present? %>
-          <div class="flex-video widescreen">               
-            <%= embed(@news.video_url) %>
-          </div>
-      <% end %>
-      <div class="description">
-        <%= @news.description.html_safe %>
+        <div class="col-md-6">
+          <% if @news.image_news.present? %>  
+            <div class="first-image" style="background-image: url(<%= @news.image_news.first.url(:original) %>)"></div>
+          <% else %>  
+            <% if @news.video_url.present? %>
+              <div class="flex-video widescreen">               
+                <%= embed(@news.video_url) %>
+              </div>
+            <%end%>
+          <% end %>
+        </div>
+        <div class="col-md-12 description" style="margin-top:20px;">
+          <%= @news.description.html_safe %>
+        </div>
       </div>
     </div>
-    
-
-
-
-
-
   </div>
-</div>
-<section class="probootstrap-section contact" style="background-image:linear-gradient(to left, rgba(9,88,93, 1) 50%, rgba(9, 88, 93, .1) 75%, transparent 50%),url(<%= image_url('back_contact.jpeg')%>);margin-top:64px">
+</section>
+<section class="probootstrap-section categories">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-4">
+          <div class="col-md-3" style="margin-top:10%">
+            <img class="thumb_75" src="<%= image_url('category_1.png')%>"/>
+          </div>
+          <div class="col-md-9">
+            <h6 class="title">Título da Atividade</h6>
+            <p class="description" style="height:100%">Lorem ipsum vivamus nam cras convallis elit risus praesent non consectetur purus lacus</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="col-md-3" style="margin-top:10%">
+            <img class="thumb_75" src="<%= image_url('category_2.png')%>"/>
+          </div>
+          <div class="col-md-9">
+            <h6 class="title">Título da Atividade</h6>
+            <p class="description" style="height:100%">Lorem ipsum vivamus nam cras convallis elit risus praesent non consectetur purus lacus</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="col-md-3" style="margin-top:10%">
+            <img class="thumb_75" src="<%= image_url('category_3.png')%>"/>
+          </div>
+          <div class="col-md-9">
+            <h6 class="title">Título da Atividade</h6>
+            <p class="description" style="height:100%">Lorem ipsum vivamus nam cras convallis elit risus praesent non consectetur purus lacus</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="col-md-3" style="margin-top:10%">
+            <img class="thumb_75" src="<%= image_url('category_4.png')%>"/>
+          </div>
+          <div class="col-md-9">
+            <h6 class="title">Título da Atividade</h6>
+            <p class="description" style="height:100%">Lorem ipsum vivamus nam cras convallis elit risus praesent non consectetur purus lacus</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="col-md-3" style="margin-top:10%">
+            <img class="thumb_75" src="<%= image_url('category_5.png')%>"/>
+          </div>
+          <div class="col-md-9">
+            <h6 class="title">Título da Atividade</h6>
+            <p class="description" style="height:100%">Lorem ipsum vivamus nam cras convallis elit risus praesent non consectetur purus lacus</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="col-md-3" style="margin-top:10%">
+            <img class="thumb_75" src="<%= image_url('category_6.png')%>"/>
+          </div>
+          <div class="col-md-9">
+            <h6 class="title">Título da Atividade</h6>
+            <p class="description" style="height:100%">Lorem ipsum vivamus nam cras convallis elit risus praesent non consectetur purus lacus</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="probootstrap-section roteiros">
+  <div class="container">
+    <div class="row">
+      <div class="probootstrap-heading justify-content col-md-12">
+        <div class="image-center">
+          <image src="<%= image_url('5.png')%>" align="center" class="thumb_75"/>
+        </div>
+        <h1 align="center" class="primary-heading">Fotos</h1>
+        <p align="center" class="col-md-6 col-md-offset-3 text-thin">Lorem ipsum vivamus nam cras convallis elit risus praesent non consectetur purus lacus</p>
+      </div>
+      <div class="roteiro-carousel col-md-6 col-md-offset-3">
+        <% if @news.image_news.present? %>  
+          <div class="news_image_description">
+            <div class="legend">
+              <%= @news.subtitle %>
+            </div>
+            <% if @news.image_news.count == 1 %>
+              <img src=<%= @news.image_news.first.url(:original) %> ></img>
+            <% else %>  
+
+              <div id="carousel-news" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                   <% @news.image_news.each_with_index do |img, index| %>
+                    <% if index == 0 %>
+                      <li data-target="#carousel-news" data-slide-to="<%= index %>" class="active" style="background-image: url(<%= image_url(img.url(:original)) %>)">
+                      </li>
+                    <% else %>
+                      <li data-target="#carousel-news" data-slide-to="<%= index %>" style="background-image: url(<%= image_url(img.url(:original)) %>)">
+                      </li>                  
+                    <% end %>
+                  <% end %>
+                </ol>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                  <% @news.image_news.each_with_index do |img, index| %>
+                    <% if index == 0 %>
+                      <div class="item active">
+                        <img src="<%= img.url(:original) %>" alt="...">
+                      </div>
+                    <% else %>
+                      <div class="item">
+                        <img src="<%= img.url(:original) %>" alt="...">
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            <%end%>           
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="probootstrap-section contact" style="background-image:linear-gradient(to left, rgba(9,88,93, 1) 50%, rgba(9, 88, 93, .1) 75%, transparent 50%),url(<%= image_url('back_contact.jpeg')%>);">
   <div class="golden-border darker-border"></div>
   <div class="container">
     <div class="row">

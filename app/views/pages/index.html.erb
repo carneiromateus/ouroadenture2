@@ -1,10 +1,4 @@
-<style type="text/css">
-
-</style>
-
-<div class="main_container">
-
- 
+<div class="main_container"> 
 
  <section class="flexslider" data-section="welcome">
 
@@ -107,77 +101,44 @@
 </section>
 
 <section class="probootstrap-section roteiros" data-section="roteiros">
-
   <div class="container">
-
-   <div class="row">
-
-    <div class="probootstrap-heading justify-content">
-
-     <div class="image-center">
-
-      <image src="<%= image_url('13.png')%>" align="center" class="thumb_75"/>
-
-      </div>
-
-      <h1 align="center" class="primary-heading">Roteiros</h1>
-
-      <p align="center" class="col-md-6 col-md-offset-3">Lorem ipsum vivamus nam cras convallis elit risus praesent non consectetur purus lacus aliquet, integer velit massa ultrices consequat duis commodo ultrices class porta turpis elementum. quisque scelerisque feugiat nunc quis porta morbi varius </span>
-
-      </div>
-
-      <div class="col-md-12" style="margin:30px 0;">
-
-       <% @news.each_slice(2) do |slice| %>
-
-       <div class="col-md-4 col-md-offset-2 justify"> 
-
-        <div class="image-center img-roteiro" style="background-image: url(<%=slice[0].image_news.first.url(:medium)%>)">      
-
+    <div class="row">
+      <div class="probootstrap-heading justify-content">
+        <div class="image-center">
+          <image src="<%= image_url('13.png')%>" align="center" class="thumb_75"/>
         </div>
+        <h1 align="center" class="primary-heading">Roteiros</h1>
+        <p align="center" class="col-md-6 col-md-offset-3">Lorem ipsum vivamus nam cras convallis elit risus praesent non consectetur purus lacus aliquet, integer velit massa ultrices consequat duis commodo ultrices class porta turpis elementum. quisque scelerisque feugiat nunc quis porta morbi varius </p>
+      </div>
+      <div class="col-md-12" style="margin:30px 0;">
+        <% @news.each_slice(2) do |slice| %>
+          <div class="col-md-4 col-md-offset-2 justify"> 
+            <div class="image-center img-roteiro" style="background-image: url(<%=slice[0].image_news.first.url(:medium)%>)">     
+            </div>
+            <div class="text ">
 
-        <div class="text ">
+              <h3 class="txt-roteiro"><%= link_to slice[0].title, noticia_path(slice[0]) %></h3>
 
-         <h3 class="txt-roteiro"><%= link_to slice[0].title, noticia_path(slice[0]) %></h3>
+              <p class="description-roteiro"><%= slice[0].short_description.html_safe.truncate(200, :omission => "...") %></p>
 
-         <p class="description-roteiro"><%= slice[0].short_description.html_safe.truncate(200, :omission => "...") %></p>
+              <button class="btn_flat know_more"><a href="<%=noticia_path(slice[0])%>#" class="link-sm">Saiba mais</a></button>
+            </div>
+          </div>
 
-         <button class="btn_flat know_more"><a href="<%=noticia_path(slice[0])%>#" class="link-sm">Saiba mais</a></button>
+          <div class="col-md-4 justify"> 
+            <div class="image-center img-roteiro" style="background-image: url(<%=slice[0].image_news.first.url(:medium)%>)"></div> 
 
-       </div>
-
-       <!-- <p class='col-12'>Lorem ipsum vivamus nam cras conva elit risus prae sent non con sec purus lacus aliquet, inte er velit massa ult rices conseq uat duis comm odo nam cras </p> -->
-
-     </div>
-
-     <div class="col-md-4 justify"> 
-
-      <div class="image-center img-roteiro" style="background-image: url(<%=slice[0].image_news.first.url(:medium)%>)">       
-
+            <div class="text">
+              <h3 class="txt-roteiro"><%= link_to slice[1].title, noticia_path(slice[1]) %></h3>
+              <p class="description-roteiro"><%= slice[1].short_description.html_safe.truncate(200, :omission => "...") %></p>
+              <button class="btn_flat know_more"><a href="<%=noticia_path(slice[1])%>#" class="link-sm">Saiba mais</a></button>
+            </div>
+            <a class="all-link" href="#">Todos os roteiros <div class="arrow-right"></div></a>     
+          </div>
+        <%end%>
       </div> 
-
-      <div class="text">
-
-       <h3 class="txt-roteiro"><%= link_to slice[1].title, noticia_path(slice[1]) %></h3>
-
-       <p class="description-roteiro"><%= slice[1].short_description.html_safe.truncate(200, :omission => "...") %></p>
-
-       <button class="btn_flat know_more"><a href="<%=noticia_path(slice[1])%>#" class="link-sm">Saiba mais</a></button>
-
-     </div>
-
-     <a class="all-link" href="#">Todos os roteiros <div class="arrow-right"></div></a>     
-
-   </div>
-
-   <%end%>
-
- </div> 
-
-</div>
-
-</div>
-
+    </div>
+  </div>
 </section>
 
 <section class="probootstrap-section how_works" data-section="tranlados">
