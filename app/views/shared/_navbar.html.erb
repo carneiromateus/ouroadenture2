@@ -97,6 +97,85 @@
     max-width: 360px;
     max-height: 70px;
   }
+  .thumb_75{
+    width:75px;
+    margin-top:5px;
+  }
+  .img-roteiro{
+    border:8px solid #9B9740;
+    padding:0;
+    height:200px;
+    background-size: 100%;
+    background-position: center;
+  }
+  .txt-roteiro{
+    margin-top:5px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .txt-roteiro > a{
+    color:#9B9740;
+  }
+  .description-roteiro{
+    font-size:12px;
+    font-weight: 100;
+    color:#06454A;
+    text-align: justify;
+  }
+  .text > p{
+    font-size:13px;
+    font-weight: 100;
+    color:#06454A;
+    text-align: justify;
+  }
+  .know_more{
+    border:4px solid #9B9740;
+    padding:2px 15px;
+    background-color: white;
+    margint-bottom:20px;
+  }
+  .know_more:hover{
+    border-color:#6c692c;
+    color:#6c692c;
+    background-color: white;
+  }
+  .know_more a{
+    text-transform: none;
+    text-decoration: none;
+    color:#9B9740 ;
+  }
+</style>
+<style type="text/css">
+  @media only screen and (max-width : 992px) {
+    .slider .caption h3{
+      font-size: 15px;
+    }
+    .slider .caption h5{
+      font-size: 10px;
+    }
+    .paginate{
+      width: 50%!important;
+    }
+  }
+  .top-container{
+    margin-top:64px;
+    height: 250px;
+    background-size: 100%;
+    background-position: center;
+    text-align:center;
+    color:white;
+  }
+  .top-container .thumb_115{
+    margin-top: 35px;
+    margin-bottom: -35px;
+    width:115px;
+  
+  }
+  .top-container h3{
+    font-weight: bold;
+
+  }
+
 </style>
 <nav class="navbar-fixed-top">
   <div class="nav-container">
@@ -123,7 +202,7 @@
           <li class="<%= 'active' if current_page?(root_path) %>"><a href="/">Home</a><div class="arrow-up"></div></li>
           
           <li class="<%= 'active' if current_page?(ofestival_path) %>"><a href="/ofestival">Como funciona</a><div class="arrow-up"></div></li>
-          <li class="<%= 'active' if current_page?(eventos_path) %>"><a href="/eventos">Roteiros</a><div class="arrow-up"></div></li>
+          <li class="<%= 'active' if current_page?(noticias_path) %>"><a href="/noticias">Roteiros</a><div class="arrow-up"></div></li>
           <li class="<%= 'active' if current_page?(feiras_path) %>"><a href="/feiras">Translados</a><div class="arrow-up"></div></li>
           <li class="<%= 'active' if current_page?(oficinas_path) %>"><a href="/iniciooficinas">Contato</a><div class="arrow-up"></div></li>            
   
