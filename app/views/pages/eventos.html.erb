@@ -1,162 +1,75 @@
 
-<style type="text/css">
-  @media only screen and (max-width : 768px) {
-    .event-list > li > img{
-        display:none;
-    }
-    .event-list > li{
-      margin:0px 10em 20px;
-    }
-    .filter{
-      display: none;
-    }
 
-  }
-  @media only screen and (max-width : 504px) {
-    .event-list > li{
-      margin:0px 4em 20px;
-    }
-  }
-  .desc p{
-    margin:0px 10px 10px;
-    font-size:16px;
-    line-height: 1.1;
-  }
-</style>
-<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
-<div class="container">
-  <div class="row filters">
-    </br>
-    </br>
-    </br>
-    <div class="category filter-button-group btn-group-sm" data-filter-group="category">
-      <button type="button" style="margin-top:5px;" class="btn btn-secondary"  data-filter= "*" >
-        Todos
-      </button>
-      <% if @categorias.any? %>
-        <% @categorias.each do | categoria | %>
-          <button class="btn btn-secondary" style="margin-top:5px;" data-filter= ".<%=categoria%>"><%= categoria %> </button>
-        <% end %>
-      <% end %>
-    </div>
-   
+<% content_for :title do %>
+  <%= "Translados" %>
+<% end %>
 
-    </br>
-    </br>
-    </br>
+  
+<div class="top-container" style="background-image:url('<%=image_url('back_photo2.jpg') %>') ">
+  <image src="<%= image_url('13.1.png')%>" align="center" class="thumb_115"/>
+  <h3 align="center" class="primary-heading">Translados</h3>
+</div>
+<div class="festival_container_home">
+  <div class="row">
+     <div class="col-md-12" style="margin:30px 16%;">
+      <% @news.each do |item| %>
+        <div class="col-md-4 left"> 
+          <div class="image-center img-roteiro" style="background-image: url(<%=item.image_news.first.url(:medium)%>)">           
+          </div>
+          <div class="text ">
+            <h3 class="txt-roteiro"><%= link_to item.title, noticia_path(item) %></h3>
+            <p class="description-roteiro"><%= item.short_description.html_safe.truncate(200, :omission => "...") %></p>
+            <button class="btn_flat know_more"><a href="<%=noticia_path(item)%>#" class="link-sm">Saiba mais</a></button>
+          </div>
+        </div>     
+      <%end%>
+    </div>    
   </div>
-  <div class = "row">
-      <div class="col-sm-2 filter">
-        <div class="category filter-button-group btn-group-sm" data-filter-group="date">
-          <button style=" margin-left:0px" type="button" class="btn btn-secondary"  data-filter= "*" >
-            Todos os Dias
-          </button>
-          <% (@date_start.publish_at.to_date .. @date_end.date_end.to_date).each do |date| %>
-                <button class="btn btn-secondary" style="margin-left:0px;margin-top:5px;padding:5px 4px;" data-filter= ".<%= date.strftime("%d%m")%>"><%= date.strftime("%d/%m") %> </button>
-          <%end%>
-         
-        </div>
-      </div>
-      <div class="[ col-xs-12 col-sm-offset-0 col-sm-8 ]">
-        <div class = "item-list">
-        <ul class="event-list">
-          <%if @events.size > 0 %>
-            <% @events.each do |event|%>                 
-              <%if not event.date_end.nil? %>
-                <% if event.date_end > event.publish_at %>
-                  <% (event.publish_at.to_date .. event.date_end.to_date).each do |date|%> 
-                    <li class="mm-item <% if not event.categories.empty?%> <% event.category_ids.each do |cat| %> <%=event.categories.find(cat).name%><%end%><%end%>  <%=date.strftime("%d%m")%>" data-category="<%=date.to_datetime.strftime("%d/%m")%>">
-                      <%if  not event.publish_at.nil?  %>
-                        <time class="date" datetime="<%=date.to_datetime%>" style="background-color:<%=%>">
-                          <span class="day"><%=date.to_datetime.strftime("%d")%></span>
-                          <span class="month"><%=(I18n.l(date.to_datetime,format: :mes))%></span>
-                        </time>
-                      <%end%>
-                          
-                      <%if not event.image.nil? || event.image.url == "/images/original/missing.png" %>
-                        <%= image_tag event.image.url%>
-                      <% end %>
-                      <div class="info">
-                        <h2 class="title"><%= link_to event.name, evento__path(event)  %></h2>
-                        <div class="desc" style="text-align:center;margin-top:15px">
-                          <a href="<%=evento__path(event)%>">
-                            <span  class="fa fa-plus"> Mais Informações</span>
-                          </a>
-                        </div>
-                        <ul style="background-color:lightgray;">
-                          <div class="col s-6" style="margin-left:25px;">
-                            <span class="fa fa-map-marker"></span><%=event.location.html_safe%>
-                          </div>
-                          <div class="col s-6"  style="margin-right:25px; float:right; ">
-                            <span class="fa fa-clock-o"></span><%= event.publish_at.strftime('%-H:%M') %>
-                          </div>
-                        </ul>
-                      </div>
-                    </li>
-                  <%end%>
-                <%else%>  
-                  <li class="mm-item <% if not event.categories.empty?%> <% event.category_ids.each do |cat| %> <%=event.categories.find(cat).name%><%end%><%end%> <%=event.publish_at.strftime("%d%m")%>" data-category="<%=event.publish_at.strftime("%d/%m")%>">
-                    <%if not event.publish_at.nil?  %>
-                      <time class="date" datetime="<%=event.publish_at%>" style="background-color:<%=%>">
-                        <span class="day"><%=event.publish_at.strftime("%d")%></span>
-                        <span class="month"><%=(I18n.l(event.publish_at,format: :mes))%></span>
-                      </time>
-                    <%end%>
-                        
-                    <%if not event.image.nil? || event.image.url == "/images/original/missing.png" %>
-                      <%= image_tag event.image.url%>
-                    <% end %>
-                    <div class="info">
-                      <h2 class="title"><%= link_to event.name, evento__path(event)  %></h2>
-                      <div class="desc" style="text-align:center;margin-top:15px">
-                        <a href="<%=evento__path(event)%>">
-                          <span class="fa fa-plus"> Mais Informações</span>
-                        </a>
-                      </div>
-                      <ul style="background-color:lightgray;">
-                        <div class="col s-6" style="margin-left:25px;">
-                          <span class="fa fa-map-marker"></span><%=event.location.html_safe%>
-                        </div>
-                        <div class="col s-6" style="margin-right:25px; float:right; ">
-                          <span class="fa fa-clock-o"></span><%= event.publish_at.strftime('%-H:%M') %>
-                        </div>
-                      </ul>
-                    </div>
-                  </li>
-                <%end%>
-              <%end%>
-            <%end%>
-          <% end %>
-        </ul>
-      </div>
-    </div>
+  <div class="paginate" >
+    <%= will_paginate @news, :previous_label => 'Seguinte', :next_label => 'Próximo' %>
   </div>
 </div>
 
 
-
-
-
 <script type="text/javascript">
-$('.item-list').isotope({
-  // options
-  itemSelector: '.mm-item',
-  layoutMode: 'vertical',
-  getSortData: {
-    date: '[data-category]'
-  },
-  sortBy: 'date'
-  
-});
-$('.filter-button-group').on( 'click', 'button', function() {
+  ;( function( $, window, document, undefined )
+  {
+      'use strict';
+   
+      var $list       = $( '.card-festival' ),
+          $items      = $list.find( '.card-festival-content' ),
+          setHeights  = function()
+          {
+              $items.css( 'height', 'auto' );
+   
+              var perRow = Math.floor( $list.width() / $items.width() );
+              if( perRow == null || perRow < 2 ) return true;
+   
+              for( var i = 0, j = $items.length; i < j; i += perRow )
+              {
+                  var maxHeight   = 0,
+                      $row        = $items.slice( i, i + perRow );
+   
+                  $row.each( function()
+                  {
+                      var itemHeight = parseInt( $( this ).outerHeight() );
+                      if ( itemHeight > maxHeight ) maxHeight = itemHeight;
+                  });
+                  $row.css( 'height', maxHeight );
+              }
+          };
+   
+      setHeights();
+      $( window ).on( 'resize', setHeights );
+   
+  })( jQuery, window, document );
 
-  var filterValue = $(this).attr('data-filter');
-  $('.item-list').isotope({ filter: filterValue });
-});
-  
+  jQuery(document).ready(function(){
 
-
-
-
-
+    $('.slider').slider({
+      indicators: true,
+      interval: 10000,
+    });
+  });
 </script>
+
