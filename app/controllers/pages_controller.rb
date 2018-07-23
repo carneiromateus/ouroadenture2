@@ -11,15 +11,14 @@ class PagesController < ApplicationController
     @user = User.first
 	end
 	def midia
-	    @last_year= DateTime.new(Time.zone.now.year, 1, 1)
+    @last_year= DateTime.new(Time.zone.now.year, 1, 1)
  		@midia = Midium.where("publish_at > ?", @last_year).order('publish_at DESC').paginate(page: params[:page], per_page: 9)
 	end
   	def noticias
-	    @last_year= DateTime.new(Time.zone.now.year, 1, 1)
- 		@news = News.where("publish_at > ?", @last_year).order('publish_at DESC').paginate(page: params[:page], per_page: 9)
+ 		@news = News.order('publish_at DESC').paginate(page: params[:page], per_page: 9)
 	end
 	def noticia
-	    @news = News.find(params[:id])
+    @news = News.find(params[:id])
 		@more_news = News.where.not(id: @news.id).order("publish_at DESC").limit(3)
 	end
 	def edicoes
@@ -29,19 +28,21 @@ class PagesController < ApplicationController
 		@edital = Edital.find(params[:id])
 	end
  	def editais
-    	@editals = Edital.where(tipo_edital: "Licitação" ).order("date_published DESC").paginate(page: params[:page], per_page: 10)
-  	end
-  	def evento
-		@event = Event.find(params[:id])
+  	@editals = Edital.where(tipo_edital: "Licitação" ).order("date_published DESC").paginate(page: params[:page], per_page: 10)
 	end
-  	def eventos
-    	@events = Event.all.order("publish_at ASC")
-    	@categorias = Category.all
-    	@date_start = Event.order("publish_at ASC").limit(1).first
-    	@date_end = Event.order("date_end DESC").limit(1).first
+	def evento
+		# @event = Event.find(params[:id])
+    @news = News.find(params[:id])
+	end
+	def eventos
+  	@events = Event.all.order("publish_at ASC")
+  	@categorias = Category.all
+  	@date_start = Event.order("publish_at ASC").limit(1).first
+  	@date_end = Event.order("date_end DESC").limit(1).first
+    @news = News.order('publish_at DESC').paginate(page: params[:page], per_page: 9)
 
-    end
-    def eventojm
+  end
+  def eventojm
 		@event = Evento.find(params[:id])
 	end
   	def eventosjm
@@ -50,10 +51,10 @@ class PagesController < ApplicationController
     	@date_start = Evento.order("publish_at ASC").limit(1).first
     	@date_end = Evento.order("date_end DESC").limit(1).first
 
-    end
-  	def editais_selecao
-    	@editals = Edital.where(tipo_edital: "Seleção" ).order("date_published DESC").paginate(page: params[:page], per_page: 10)
-  	end
+  end
+	def editais_selecao
+  	@editals = Edital.where(tipo_edital: "Seleção" ).order("date_published DESC").paginate(page: params[:page], per_page: 10)
+	end
 	def edicao
 		@edition = Edition.find(params[:id])
 		@year = @edition.year.strftime("%Y")

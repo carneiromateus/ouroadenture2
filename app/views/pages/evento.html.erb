@@ -1,9 +1,10 @@
+
 <% content_for :title do %>
-  <%= "Festival de Inverno | " + truncate(@event.name, length: 70) %>
+  <%= "Ouro Adventure | " + truncate(@news.title, length: 70) %>
 <% end %>
 
 <% content_for :description do %>
-  <%= truncate(strip_tags(@event.description), length: 300) %>
+  <%= truncate(strip_tags(@news.description), length: 300) %>
 <% end %>
 
 
@@ -12,39 +13,117 @@
 
     <div id="news_show">
       <h5 class="title" >
-        <%= @event.name %> 
+        <%= @news.title %> 
       </h5>
 
-      <% if @event.image.present? %>  
-        <div class="news_image_description">
-          <img src=<%= @event.image.url(:original) %> ></img>
-        </div>      
-      <% end %>
-       <div class="description">
-        <%if not @event.date_end.nil? %>
-          <% if @event.date_end > @event.publish_at %>
-            <p>Data de Início: <%=(I18n.l(@event.publish_at, format: :date1)) %></p>
-            <p>Data de Término: <%=(I18n.l(@event.date_end, format: :date1)) %></p>
-          <%end%>
-        <%else%>
-            <p>Data: <%=(I18n.l(@event.publish_at, format: :date1)) %></p>
+      <% if not @news.user.nil? %>
+        <p class="username">
+          Publicado por
+          <%= @news.user.name %>
+          em
+          <%=  I18n.l(@news.publish_at, format: :long) %>
+
+          <% if @news.updated_at != @news.created_at  and @news.updated_at > @news.publish_at%>
+            <br>
+            Última atualização em <%=  I18n.l(@news.updated_at, format: :long) %>
           <% end %>
-        <p>Horário: <%= @event.publish_at.strftime('%-H:%M') %></p>
-        <p>Local: <%= @event.location %></p>
-      </div>
-      
+        </p>
+      <% end %>
+
+      <% if @news.image_news.present? %>  
+        <div class="news_image_description">
+
+          <% if @news.image_news.count == 1 %>
+            <img src=<%= @news.image_news.first.url(:original) %> ></img>
+          <% else %>  
+
+            <div id="carousel-news" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+                 <% @news.image_news.each_with_index do |img, index| %>
+                  <% if index == 0 %>
+                    <li data-target="#carousel-news" data-slide-to="<%= index %>" class="active" style="background-image: url(<%= image_url(img.url(:original)) %>)">
+                    </li>
+                  <% else %>
+                    <li data-target="#carousel-news" data-slide-to="<%= index %>" style="background-image: url(<%= image_url(img.url(:original)) %>)">
+                    </li>                  
+                  <% end %>
+                <% end %>
+
+              </ol>
+
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner" role="listbox">
+                <% @news.image_news.each_with_index do |img, index| %>
+                  <% if index == 0 %>
+                    <div class="item active">
+                      <img src="<%= img.url(:original) %>" alt="...">
+                    </div>
+                  <% else %>
+                    <div class="item">
+                      <img src="<%= img.url(:original) %>" alt="...">
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <%end%>
+          <div class="legend">
+            <%= @news.subtitle %>
+          </div>
+        </div>
+      <% end %>
+      </br>
+      </br>
+
+      <% if @news.video_url.present? %>
+          <div class="flex-video widescreen">               
+            <%= embed(@news.video_url) %>
+          </div>
+      <% end %>
       <div class="description">
-        <%= @event.description.html_safe %>
+        <%= @news.description.html_safe %>
       </div>
-     
     </div>
+    
+
+
+
+
+
   </div>
 </div>
+<section class="probootstrap-section contact" style="background-image:linear-gradient(to left, rgba(9,88,93, 1) 50%, rgba(9, 88, 93, .1) 75%, transparent 50%),url(<%= image_url('back_contact.jpeg')%>);margin-top:64px">
+  <div class="golden-border darker-border"></div>
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-md-12" style="margin:30px 0;">
+        <h2 class="contact-title"> <b>Contato</b></h2>
+      </div>
+      <div class="col-md-4 col-md-offset-6">
+        <form class="contact-form">
+          <input placeholder="Nome" type="text">
+          <input placeholder="Email" type="email">
+          <input placeholder="Telefone(opcional)" type="text">
+          <input placeholder="Assunto" type="text">
+          <textarea placeholder="Mensagem..."></textarea>
+          <button class="btn-flat contact-submit" type="submit">Enviar</button>
+        </form>
+      </div>       
+    </div>
+  </div>
+</section>
 
 
 
 <script type="text/javascript">
 
+  $(document).ready(function(){
+    $('#carousel.post').carousel({
+      interval: false
+    });
+  });
 
 </script>
 

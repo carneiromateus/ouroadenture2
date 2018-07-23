@@ -77,6 +77,7 @@ GEM
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.18)
+    flex-slider-rails (2.7.0)
     flickr-fu (0.1.4)
       xml-magic
     font-awesome-rails (4.7.0.2)
@@ -240,6 +241,7 @@ DEPENDENCIES
   ckeditor
   coffee-rails (~> 4.2)
   devise
+  flex-slider-rails
   flickr-fu
   font-awesome-rails
   isotope-rails (~> 2.2, >= 2.2.2)
@@ -267,4 +269,4 @@ DEPENDENCIES
   will_paginate (~> 3.1.0)
 
 BUNDLED WITH
-   1.16.0
+   1.16.2

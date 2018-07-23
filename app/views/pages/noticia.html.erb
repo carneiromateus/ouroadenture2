@@ -1,6 +1,6 @@
 
 <% content_for :title do %>
-  <%= "Festival de Inverno | " + truncate(@news.title, length: 70) %>
+  <%= "Ouro Adventure | " + truncate(@news.title, length: 70) %>
 <% end %>
 
 <% content_for :description do %>
@@ -87,39 +87,33 @@
     </div>
     
 
-    <div class="row more-news">
-      <h5 class="title">Mais Notícias</h5>
-      <div class="section-title-line"> ∎ </div>
-      
-      <% @more_news.each do | news | %>
-          <div class="card" style="height:300px">
-            <div class="card-image waves-effect waves-block waves-light">
-              <% if news.image_news.present? %>
-                <img class="activator" src=<%= news.image_news.first.url(:small) %> ></img>
-              <% end %>
-            </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4" style="font-size:14px; line-height: 28px;">
-                <b><%= news.title %></b>
-                <i class="material-icons right">more_vert</i>
-              </span>
-              <p><a href="#"><%= link_to "Ler na íntegra", noticia_path(news)  %></a></p>
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4" style="font-size:14px; line-height: 28px; ">
-                <b><%= news.title %></b>
-                <i class="material-icons right">close</i>
-              </span>
-              <div class="description">
-                <p><%= truncate(news.short_description.html_safe, length: 300, omission: ' ...')  %>
-                <a href="#"></br><%= link_to "ver mais", noticia_path(news) %></a></p>
-              </div>
-            </div>
-          </div>
-      <%end%>
-    </div>
+
+
+
+
   </div>
 </div>
+<section class="probootstrap-section contact" style="background-image:linear-gradient(to left, rgba(9,88,93, 1) 50%, rgba(9, 88, 93, .1) 75%, transparent 50%),url(<%= image_url('back_contact.jpeg')%>);margin-top:64px">
+  <div class="golden-border darker-border"></div>
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-md-12" style="margin:30px 0;">
+        <h2 class="contact-title"> <b>Contato</b></h2>
+      </div>
+      <div class="col-md-4 col-md-offset-6">
+        <form class="contact-form">
+          <input placeholder="Nome" type="text">
+          <input placeholder="Email" type="email">
+          <input placeholder="Telefone(opcional)" type="text">
+          <input placeholder="Assunto" type="text">
+          <textarea placeholder="Mensagem..."></textarea>
+          <button class="btn-flat contact-submit" type="submit">Enviar</button>
+        </form>
+      </div>       
+    </div>
+  </div>
+</section>
 
 
 

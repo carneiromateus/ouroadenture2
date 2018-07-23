@@ -20,4 +20,5 @@
 //= require twitter/bootstrap
 //= require bootstrap-sprockets
 //= require bootstrap-colorpicker
+//= require jquery.flexslider
 //= require_tree .
