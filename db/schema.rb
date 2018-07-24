@@ -203,6 +203,11 @@ ActiveRecord::Schema.define(version: 20170705210617) do
     t.integer  "user_id"
     t.text     "subtitle"
     t.text     "short_description"
+    t.string   "legend"
+    t.string   "duration"
+    t.string   "address"
+    t.float    "value"
+    t.string   "dates"
     t.datetime "publish_at"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false

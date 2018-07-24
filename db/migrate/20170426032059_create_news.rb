@@ -7,6 +7,11 @@ class CreateNews < ActiveRecord::Migration[5.0]
       t.references :user, index: true, foreign_key: true
       t.text :subtitle
       t.text :short_description
+      t.string :legend
+      t.string :duration
+      t.string :address
+      t.float :value
+      t.string :dates
       t.datetime :publish_at
       t.timestamps null: false
     end

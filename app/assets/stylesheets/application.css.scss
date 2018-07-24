@@ -314,7 +314,7 @@ select {
   color: #BDBDBD;
 }
 .container_admin {
-  margin: 30px 0px;
+  margin: 66px 0px;
   margin-left: 20%;
   margin-right: 10%;
   min-height: 100%;
@@ -325,20 +325,21 @@ select {
   width: 15%;
   font-size:14px;
   text-align: right;
-  margin-top: 75px;
   color: #51565b;
   display:flex; 
-  margin-left: 10px;
+  margin:25px 0 5px;
 }
-
+.container_admin .btn{
+  margin:30px 0;
+}
 .container_admin input, 
 .container_admin textarea,
 .container_admin select {
-  width: 100%;
+  width: 75%;
   border: 1px solid #ccc;
   height: 3rem;
-  padding: 0 5;
   box-sizing: inherit;
+  padding:5px
 }
 
 .container_admin textarea{
@@ -347,6 +348,7 @@ select {
 
 .container_admin input[type=file]{
   border: none;
+    padding: 0;
 }
 .container_admin input[type=text]{
   font-size:12px;

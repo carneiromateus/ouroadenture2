@@ -1,15 +1,3 @@
-<style type="text/css">
-.cke_editor_news_description
-{
-  margin-left: 70px;
-}
-
-.cke_editor_news_short_description
-{
-  margin-left: 70px;
-}
-</style>
-
 <% if @news.errors.any? %>
   <div id="error_explanation" class="alert alert-danger alert-dismissible" role="alert" style="width: 80%; margin: auto">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -36,23 +24,33 @@
                     <% end %>
                     
                 </div>
-                <label>Imagens (Preferencialmente 350x250)</label>
-                <%= file_field_tag "images[]", type: :file, multiple: true, :label => "Imagem"%>
-
-                <%= f.input :subtitle, :label => "Legenda"  %>
-
-                <%= f.input :video_url, :label => "Url do vídeo do youtube"  %>
-                
-                <%= f.input :publish_at, :label => "Data da publicação",as: :datetime, :input_html => {style: 'width: inherit'}  %>
-
                 <%= f.input :title, :label => "Título" %>
 
-                <label>*Descrição </label>
-                <%= f.cktext_area :description %>
+                <%= f.input :subtitle, :label => "*Subtítulo"  %>
+
                 
+
                 <label>*Descrição curta </label>
                 <%= f.cktext_area :short_description  %>
                 </br>
+                <label>*Porque ir ? </label>
+                <%= f.cktext_area :description %>
+
+                <%= f.input :duration, :label => "Duração" %>
+                <%= f.input :address, :label => "Local"  %>
+                <%= f.input :value, :label => "Valor" , :input_html => {style: 'width:10%'} %>
+                <%= f.input :dates, :label => "Datas"  %>
+
+                <label>*Imagen(s)</label>
+                <%= file_field_tag "images[]", type: :file, multiple: true, :label => "Imagem"%>
+
+
+                <!--<%= f.input :video_url, :label => "Url do vídeo do youtube"  %>
+                
+                <%= f.input :publish_at, :label => "Data da publicação",as: :datetime, :input_html => {style: 'width: inherit'}  %>-->
+                
+                <%= f.input :legend, :label => "*Legenda das Fotos"  %>
+
                 <% if params[:action] == 'edit'%>
                     <%= f.button :submit, "Atualizar Evento" %>
                 <% else %>
