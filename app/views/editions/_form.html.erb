@@ -26,29 +26,46 @@
             <div class="col s12 m12 l12 z-depth-3 card-panel">
                 <div class="center">
                     <% if params[:action] == 'edit'%>
-                        <h2 class="title" style="margin: 20px 0px;">Editar Edição</h2>
+                        <h2 class="title" style="margin: 40px 0px;">Editar Translado</h2>
                     <% else %>
-                        <h2 class="title" style="margin: 20px 0px;">Nova Edição</h2>
+                        <h2 class="title" style="margin: 40px 0px;">Novo Translado</h2>
+
                     <% end %>
-                    <a ><%= image_tag("logo_h_fest_padrao_preto.png", :width => 450, :height => 100, :crop => :fill) %></a>
+                    
                 </div>
+                <%= f.input :title, :label => "Título" %>
 
-               <label>Imagem (200x200)</label>
-                <%= file_field_tag "images[]", type: :file, multiple: false, :label => "Imagem" %>
+                <%= f.input :subtitle, :label => "*Subtítulo"  %>
 
-                <%= f.input :year, :label => "Ano da Edição",as: :date ,:order => [:year], :input_html => {style: 'width: inherit'}  %>
-
-                <%= f.input :local, :label  => "Link"  %>
-
-                <%= f.input :tema, :label => "Tema  (max 180) " %>
-
-                <label>Descrição </label>
-                <%= f.cktext_area :description %>
                 
+
+                <label>*Descrição curta </label>
+                <%= f.cktext_area :short_description  %>
+                </br>
+                <label>*Porque ir ? </label>
+                <%= f.cktext_area :description %>
+
+                <%= f.input :duration, :label => "Duração" %>
+                <%= f.input :address, :label => "Local"  %>
+                <%= f.input :value, :label => "Valor" , :input_html => {style: 'width:10%'} %>
+                <%= f.input :dates, :label => "Datas"  %>
+
+                <label>*Imagen(s)</label>
+                <%= file_field_tag "images[]", type: :file, multiple: true, :label => "Imagem"%>
+          
+                
+                <%= f.input :legend, :label => "*Legenda das Fotos"  %>
+
+                <label>*Atividade(s)</label>
+                <% @activities.each do |item| %>
+                    <input class="boolean optional" id="<%=item.name%> " value="<%=item.id%>" name="director_ids[]" type="checkbox" > 
+                    <label class="boolean optional" for="<%=item.name%> "><%=item.name%></label>
+                <% end %>
+
                 <% if params[:action] == 'edit'%>
-                    <%= f.button :submit, "Atualizar Edição" %>
+                    <%= f.button :submit, "Atualizar Translado" %>
                 <% else %>
-                    <%= f.button :submit, "Criar Edição", class: 'btn' %>
+                    <%= f.button :submit, "Criar Translado", class: 'btn' %>
                 <% end %>
                 </br>
 

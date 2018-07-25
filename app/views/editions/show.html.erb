@@ -3,11 +3,11 @@
 <% end %>
 
 <% content_for :title do %>
-  <%= "Festival de Inverno | " + truncate(@edition.year.strftime("%Y"), length: 160) %>
+  <%= "Ouro Adventure | " + truncate(@edition.title, length: 160) %>
 <% end %>
 
 <% content_for :description do %>
-  <%= truncate(@edition.tema, length: 300) %>
+  <%= truncate(@edition.description, length: 300) %>
 <% end %>
 
 <% content_for(:side_bar) do %>
@@ -18,29 +18,42 @@
   <div class="content-body" >
 
     <div id="news_show">
-      
-      <% if @edition.image_edition.present? %>
-        <%= image_tag(@edition.image_edition.first.url(:medium)) %>
-      <% end %>
+      <h5 class="title" >
+        <%= @edition.title %> 
+      </h5>
 
-      <div class="year">
-        <%= @edition.year.strftime("%Y")%>
-      </div>
-      <div class="local">
-        <%= @edition.local %>
-      </div>
-      <div class="tema">
-        <%= @edition.tema %>
-      </div>
+      <div class="description">
+        <%= @edition.short_description.html_safe %>
+      </div>         
       <div class="description">
         <%= @edition.description.html_safe %>
+      </div>
+      <div class="row">
+        <div class="att col-md-12 left">
+          <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
+          <span class="description"><b>Duração: </b> <%= @edition.duration %></span>
+
+        </div>
+        <div class="att col-md-12 left">
+          <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
+          <span class="description"><b>Local:</b> <%= @edition.address %></span>
+        </div>  
+        <div class="att col-md-12 left">
+          <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
+          <span class="description"><b>Valor:</b> R$<%= @edition.value %></span>
+        </div>
+        <div class="att col-md-12 left">
+          <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
+          <span class="description"><b>Datas:</b> <%= @edition.dates %></span>
+        </div> 
+          
       </div>
     </div>
    
 
     <% if user_signed_in? %>
       <%= link_to "Editar", edit_edition_path(@edition), class: "waves-effect waves-light btn" %>
-      <%= link_to "Deletar", editions_path(@edtion), class: "waves-effect waves-light btn", method: :delete, data: {confirm: "Tem certeza desta Ação?"} %>
+      <%= link_to "Deletar", edition_path(@edition), class: "waves-effect waves-light btn", method: :delete, data: {confirm: "Tem certeza desta Ação?"} %>
     <% end %>
   </div>
 </div>

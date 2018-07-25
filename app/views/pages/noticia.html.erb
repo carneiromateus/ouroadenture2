@@ -1,62 +1,6 @@
 <style type="text/css">
 
-  .roteiro-carousel .carousel-indicators{
-    bottom:20%;
-  }
-  .roteiro-carousel .legend{
-    margin-bottom:-50px;
-    padding:15px;
-    color:white;
-    font-size:15px;
-    font-weight: bold;
-    z-index: 2;
-    box-shadow: inset 0 50px 9px -7px rgba(0,0,0,0.3);
-    position: relative;
-  }
-  .categories{
-    background-color:#9B9740;
-  }
-  .categories .title{
-    margin-top:20px;
-    color:#7A7732;
-    font-size:17px;
-    font-weight: bold;
-  }
-  .categories .description{
-    color:#c3c08c;
-    font-size:12px;
-    text-align: center
-  }
-  .roteiro{
-    background-color: white;
-    padding-top: 20px;
-  }
-  .roteiro .title{
-    color:#9B9740;
-    font-size: 20px;
-    font-weight:bold;
-    text-transform: uppercase;
-    text-align: left;
 
-  }
-  .roteiro .description{
-    font-size: 14px;
-  }
-  .roteiro .bold{
-    font-weight: 
-  }
-  .roteiro .att{
-    margin:5px 0;
-    padding:0;
-  }
-  .roteiro .first-image{
-    width:100%;
-    border:8px solid #9B9740;
-    padding:0;
-    height:250px;
-    background-size: 100% 100%;
-    background-position: center;
-  }
 </style>
 <% content_for :title do %>
   <%= "Ouro Adventure | " + truncate(@news.title, length: 70) %>
@@ -79,19 +23,19 @@
           <h6 class="title"><%= @news.title %></h6>     
           <div class="att col-md-12 left">
             <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
-            <span class="description"><b>Duração:</b>Saída às 9h, retorno ás 18h</span>
+            <span class="description"><b>Duração:</b><%= @news.duration %></span>
           </div>
           <div class="att col-md-12 left">
             <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
-            <span class="description"><b>Local:</b>Nome do Local</span>
+            <span class="description"><b>Local:</b><%= @news.address %></span>
           </div>  
           <div class="att col-md-12 left">
             <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
-            <span class="description"><b>Valor:</b>210,00</span>
+            <span class="description"><b>Valor:</b><%= @news.value %></span>
           </div>
           <div class="att col-md-12 left">
             <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
-            <span class="description"><b>Datas:</b>30/05</span>
+            <span class="description"><b>Datas:</b><%= @news.dates %></span>
           </div> 
           <div class="description">
             <%= @news.short_description.html_safe %>
@@ -101,12 +45,6 @@
         <div class="col-md-6">
           <% if @news.image_news.present? %>  
             <div class="first-image" style="background-image: url(<%= @news.image_news.first.url(:original) %>)"></div>
-          <% else %>  
-            <% if @news.video_url.present? %>
-              <div class="flex-video widescreen">               
-                <%= embed(@news.video_url) %>
-              </div>
-            <%end%>
           <% end %>
         </div>
         <div class="col-md-12 description" style="margin-top:20px;">
@@ -120,15 +58,17 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
+        <%= @news.director.each do |activity|%>
         <div class="col-md-4">
           <div class="col-md-3" style="margin-top:10%">
-            <img class="thumb_75" src="<%= image_url('category_1.png')%>"/>
+            <img class="thumb_75" src="<%= activity.image%>"/>
           </div>
           <div class="col-md-9">
-            <h6 class="title">Título da Atividade</h6>
-            <p class="description" style="height:100%">Lorem ipsum vivamus nam cras convallis elit risus praesent non consectetur purus lacus</p>
+            <h6 class="title"><%= activity.name%></h6>
+            <p class="description" style="height:100%"><%= activity.description%></p>
           </div>
         </div>
+        <%end%>
         <div class="col-md-4">
           <div class="col-md-3" style="margin-top:10%">
             <img class="thumb_75" src="<%= image_url('category_2.png')%>"/>

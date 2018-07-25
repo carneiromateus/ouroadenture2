@@ -717,7 +717,7 @@ a:focus {
   border:8px solid #9B9740;
   padding:0;
   height:200px;
-  background-size: 100%;
+  background-size: 100% 100%;
   background-position: center;
 }
 .txt-roteiro{
@@ -744,18 +744,23 @@ a:focus {
   border:4px solid #9B9740;
   padding:2px 15px;
   background-color: white;
-  margint-bottom:20px;
+  margin-bottom:20px;
+  text-transform: none;
+  text-decoration: none;
+  color:#9B9740 ;
 }
 .know_more:hover{
   border-color:#6c692c;
   color:#6c692c;
   background-color: white;
+  text-decoration:none;
 }
-.know_more a{
-  text-transform: none;
-  text-decoration: none;
-  color:#9B9740 ;
+.know_more:focus{
+  border-color:#6c692c;
+  color:#6c692c;
+  background-color: white;
 }
+
 
 //OTHERS
 @media only screen and (max-width : 992px) {
@@ -944,7 +949,7 @@ a:focus {
   border:8px solid white;
   padding:0;
   height:200px;
-  background-size: 100%;
+  background-size: 100% 100%;
   background-position: center;
 }
 .txt-translado{
@@ -972,16 +977,20 @@ a:focus {
   padding:2px 15px;
   background-color:#9B9740;
   margin-bottom:20px;
+  text-transform: none;
+  color:white ;
 }
 .know_more_translado:hover{
+  background-color:#6c692c;
+  color:white ;
+  text-decoration: none;
+
+    
+}
+.know_more_translado:focus{
   background-color:#6c692c;    
 }
 
-.know_more_translado a{
-  text-transform: none;
-  text-decoration: none;
-  color:white ;
-}
 .about-title{
   color:white;
   margin-top:0px;
@@ -1013,4 +1022,65 @@ a:focus {
 }
 .blank .arrow-right {
   border-left-color: white;
+}
+
+
+//Roteiro/:id
+
+.roteiro-carousel .carousel-indicators{
+  bottom:20%;
+}
+.roteiro-carousel .legend{
+  margin-bottom:-50px;
+  padding:15px;
+  color:white;
+  font-size:15px;
+  font-weight: bold;
+  z-index: 2;
+  box-shadow: inset 0 50px 9px -7px rgba(0,0,0,0.3);
+  position: relative;
+}
+.categories{
+  background-color:#9B9740;
+}
+.categories .title{
+  margin-top:20px;
+  color:#7A7732;
+  font-size:17px;
+  font-weight: bold;
+}
+.categories .description{
+  color:#c3c08c;
+  font-size:12px;
+  text-align: center
+}
+.roteiro{
+  background-color: white;
+  padding-top: 20px;
+}
+.roteiro .title{
+  color:#9B9740;
+  font-size: 20px;
+  font-weight:bold;
+  text-transform: uppercase;
+  text-align: left;
+
+}
+.roteiro .description{
+  font-size: 14px;
+}
+.roteiro .bold{
+  font-weight: bold;
+}
+.roteiro .att{
+  margin:5px 0;
+  padding:0;
+}
+.roteiro .first-image{
+  width:100%;
+  border:8px solid #9B9740;
+  padding:0;
+  height:250px;
+  background-size: 100% 100%;
+  background-position: center;
 }

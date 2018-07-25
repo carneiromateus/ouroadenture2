@@ -3,26 +3,38 @@ class PagesController < ApplicationController
   skip_before_filter :verify_authenticity_token  
 
 	def home
-		@news = News.all.order('publish_at DESC').limit(4)
+		@news = News.all.order('created_at DESC').limit(2)
+    @translates = Editions.all.limit(2)
 		@slides = Slide.all
 		@slides = Slide.all.order(order: :asc)
-		@directors = Director.all.order(order: :asc)
-		@sponsors = Sponsor.all.order(order: :asc)
-    @user = User.first
 	end
+    def noticias
+    @news = News.order('publish_at DESC').paginate(page: params[:page], per_page: 9)
+  end
+  def noticia
+    @news = News.find(params[:id])
+    @activities = News.joins(:directors)
+
+  end
+  def edicoes
+    @editions = Edition.all
+  end
+  def edicao
+    @edition = Edition.find(params[:id]) 
+    @activities = Director.joins(:edition)
+  end
+
+  def index
+    @news = News.all.order('created_at DESC').limit(2)
+    @translates = Edition.all.limit(2)
+    @slides = Slide.all
+  end
+
+
+
 	def midia
     @last_year= DateTime.new(Time.zone.now.year, 1, 1)
  		@midia = Midium.where("publish_at > ?", @last_year).order('publish_at DESC').paginate(page: params[:page], per_page: 9)
-	end
-  	def noticias
- 		@news = News.order('publish_at DESC').paginate(page: params[:page], per_page: 9)
-	end
-	def noticia
-    @news = News.find(params[:id])
-		@more_news = News.where.not(id: @news.id).order("publish_at DESC").limit(3)
-	end
-	def edicoes
-		@editions = Edition.order(year: :desc)
 	end
 	def edital
 		@edital = Edital.find(params[:id])
@@ -39,7 +51,7 @@ class PagesController < ApplicationController
   	@categorias = Category.all
   	@date_start = Event.order("publish_at ASC").limit(1).first
   	@date_end = Event.order("date_end DESC").limit(1).first
-    @news = News.order('publish_at DESC').paginate(page: params[:page], per_page: 9)
+    @news = News.order('created_at DESC').paginate(page: params[:page], per_page: 9)
 
   end
   def eventojm
@@ -55,17 +67,11 @@ class PagesController < ApplicationController
 	def editais_selecao
   	@editals = Edital.where(tipo_edital: "Seleção" ).order("date_published DESC").paginate(page: params[:page], per_page: 10)
 	end
-	def edicao
-		@edition = Edition.find(params[:id])
-		@year = @edition.year.strftime("%Y")
-		@year_start= Time.new(@year,01,01, 00, 01, 00)
-		@year_end= Time.new(@year,12,31, 23, 59, 00)
- 		@news = News.where("publish_at >= ? AND publish_at <= ? ", @year_start,@year_end).order('publish_at DESC')
-	end
+	
 	def ofestival
 		@current_year = Time.zone.now.year
 	    @last_year= Time.zone.parse('<%= current_year %>-01-01 00:01')
- 		@news = News.where("publish_at > ?", @last_year).order('publish_at DESC')
+ 		@news = News.all
  		
 	end
 	def colaboradores
@@ -141,13 +147,5 @@ class PagesController < ApplicationController
   def set_oficina
       @oficina = Oficina.find(params[:id])
   end
-  def index
-    @news = News.all.order('publish_at DESC').limit(4)
-    @slides = Slide.all
-    @slides = Slide.all.order(order: :asc)
-    @directors = Director.all.order(order: :asc)
-    @sponsors = Sponsor.all.order(order: :asc)
-    @logo = Logo.last
-    @user = User.first
-  end
+  
 end

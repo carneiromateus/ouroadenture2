@@ -2,12 +2,17 @@ class CreateEditions < ActiveRecord::Migration[5.0]
   def change
     create_table :editions do |t|
       t.string :title
-      t.datetime :year
-      t.string :local
-      t.string :tema
+      t.string :link
       t.text :description
-
-      t.timestamps
+      t.references :user, index: true, foreign_key: true
+      t.text :subtitle
+      t.text :short_description
+      t.string :legend
+      t.string :duration
+      t.string :address
+      t.float :value
+      t.string :dates
+      t.timestamps null: false
     end
   end
 end

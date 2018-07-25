@@ -12,7 +12,6 @@ class CreateNews < ActiveRecord::Migration[5.0]
       t.string :address
       t.float :value
       t.string :dates
-      t.datetime :publish_at
       t.timestamps null: false
     end
   end

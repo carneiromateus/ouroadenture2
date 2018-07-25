@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :title do %>
-  <%= "Savassinha | Admin - Eventos" %>
+  <%= "Ouro Adventure | Admin - Roteiros" %>
 <% end %>
 
 <% content_for(:side_bar) do %>
@@ -18,7 +18,7 @@
         <%= link_to 'Novo Roteiro', new_news_path, :class=>"btn btn-small",:style => "float :left"  %>
       </br>
 
-       <h4 class="title">Roteiro</h4>
+       <h4 class="title">Roteiros</h4>
 
         <table>
           <thead>
@@ -33,7 +33,7 @@
             <% @news.each do |news| %>
               <tr>
                 <td><%= news.title %></td>
-                <td><%= news.publish_at.strftime("%d/%m/%Y") %></td>
+                <td><%= news.created_at.strftime("%d/%m/%Y") %></td>
                 <td><%= link_to("<i class='fa fa-eye'></i>".html_safe, news, :title => 'Visualizar')%></td>
                 <td><%= link_to( "<i class='fa fa-edit'></i>".html_safe, edit_news_path(news), :title => 'Editar' )%></td>
                 <td><%=link_to( "<i class='fa fa-trash'></i>".html_safe, news, :method => :delete, :data => { :confirm => 'Tem certeza que deseja apagar?' }, :title => 'Excluir' )%></td>

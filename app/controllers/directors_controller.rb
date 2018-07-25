@@ -4,7 +4,7 @@ class DirectorsController < ApplicationController
   # GET /directors
   # GET /directors.json
   def index
-    @directors = Director.all.order(order: :asc)
+    @directors = Director.all
   end
 
   # GET /directors/1
@@ -69,6 +69,6 @@ class DirectorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def director_params
-      params.require(:director).permit(:name, :order, :link, :image)
+      params.require(:director).permit(:name, :description, :image)
     end
 end

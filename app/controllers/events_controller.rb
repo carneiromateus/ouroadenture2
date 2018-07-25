@@ -15,24 +15,46 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    @activities = Director.all
+
   end
 
 
   # GET /events/1/edit
   def edit
+    @activities = Director.all
   end
 
   # POST /events
   # POST /events.json
   def create
     @event = Event.new(event_params)
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
-      else
-        format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+    if params.has_key?(:images)
+      respond_to do |format|
+        if @event.save
+
+          if params[:images]
+            params[:images].each { |image|
+              @event.image_events.create(url: image)
+            }
+          end
+
+          format.html { redirect_to @event, notice: 'event was successfully created.' }
+          format.json { render :show, status: :created, location: @event }
+        else
+          format.html { render :new }
+          format.json { render json: @event.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        if @event.save 
+            format.html { redirect_to @event, notice: 'event was successfully created.' }
+            format.json { render :show, status: :created, location: @event }
+        else
+          format.html { render :new }
+          format.json { render json: @event.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -42,13 +64,31 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+
+        if params[:images] and not params[:images].empty?
+          @event_images = @event.image_events
+          @event_images.destroy_all
+
+          params[:images].each { |image|
+              @event.image_events.create(url: image)
+          }
+        end
+
+        format.html { redirect_to @events, notice: 'events was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
       else
-        format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        respond_to do |format|
+          if @events.save 
+              format.html { redirect_to @event, notice: 'events was successfully created.' }
+              format.json { render :show, status: :created, location: @events }
+          else
+            format.html { render :new }
+            format.json { render json: @event.errors, status: :unprocessable_entity }
+          end
+        end
       end
     end
+    
   end
 
   # DELETE /events/1
@@ -69,6 +109,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :description, :cost, :location, :image, :publish_at, {category_ids: []}, :date_end)
+      params.require(:event).permit(:dates, :title, :legend, :duration, :address, :value, :link, :description, :user_id, :subtitle, :video_url, :short_description, director_ids: [])
     end
 end

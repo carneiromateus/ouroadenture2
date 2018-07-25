@@ -117,11 +117,11 @@
             </div>
             <div class="text ">
 
-              <h3 class="txt-roteiro"><%= link_to slice[0].title, noticia_path(slice[0]) %></h3>
+              <h3 class="txt-roteiro"></h3><%= slice[1].title %>
 
               <p class="description-roteiro"><%= slice[0].short_description.html_safe.truncate(200, :omission => "...") %></p>
 
-              <button class="btn_flat know_more"><a href="<%=noticia_path(slice[0])%>#" class="link-sm">Saiba mais</a></button>
+              <a class="btn_flat know_more" href="<%=noticia_path(slice[0])%>" class="link-sm">Saiba mais</a>
             </div>
           </div>
 
@@ -129,11 +129,11 @@
             <div class="image-center img-roteiro" style="background-image: url(<%=slice[0].image_news.first.url(:medium)%>)"></div> 
 
             <div class="text">
-              <h3 class="txt-roteiro"><%= link_to slice[1].title, noticia_path(slice[1]) %></h3>
+              <h3 class="txt-roteiro"></h3><%= slice[1].title %>
               <p class="description-roteiro"><%= slice[1].short_description.html_safe.truncate(200, :omission => "...") %></p>
-              <button class="btn_flat know_more"><a href="<%=noticia_path(slice[1])%>#" class="link-sm">Saiba mais</a></button>
+              <a class="btn_flat know_more" href="<%=noticia_path(slice[1])%>" class="link-sm">Saiba mais</a>
             </div>
-            <a class="all-link" href="#">Todos os roteiros <div class="arrow-right"></div></a>     
+            <a class="all-link" href="<%=noticias_path%>">Todos os roteiros <div class="arrow-right"></div></a>     
           </div>
         <%end%>
       </div> 
@@ -177,7 +177,7 @@
 
          <p class="description-translado"><%= slice[0].short_description.html_safe.truncate(200, :omission => "...") %></p>
 
-         <button class="btn_flat know_more_translado"><a href="<%=noticia_path(slice[0])%>#" class="link-sm">Saiba mais</a></button>
+      <a class="btn_flat know_more_translado" href="<%=noticia_path(slice[0])%>" class="link-sm">Saiba mais</a>
 
        </div>
 
@@ -197,11 +197,11 @@
 
        <p class="description-translado"><%= slice[1].short_description.html_safe.truncate(200, :omission => "...") %></p>
 
-       <button class="btn_flat know_more_translado"><a href="<%=noticia_path(slice[1])%>#" class="link-sm">Saiba mais</a></button>
+      <a class="btn_flat know_more_translado" href="<%=noticia_path(slice[1])%>" class="link-sm">Saiba mais</a>
 
      </div>
 
-     <a class="all-link blank" href="#">Todos os roteiros <div class="arrow-right"></div></a>    
+     <a class="all-link blank" href="<%=editions_path%>">Todos os translados <div class="arrow-right"></div></a>    
 
    </div>
 

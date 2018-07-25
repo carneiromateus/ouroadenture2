@@ -30,9 +30,8 @@
         
                 <%= f.input :name, label: "Nome" %>
 
-                <%= f.input :link, label: "O que é" %>
+                <%= f.input :description, label: "Descrição" %>
 
-                <%= f.input :order, label: "Ordem" %>
 
 				<% if params[:action] == 'edit'%>
                     <%= f.button :submit, "Atualizar Atividade" %>

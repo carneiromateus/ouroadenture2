@@ -24,11 +24,6 @@ ActiveRecord::Schema.define(version: 20170705210617) do
     t.integer "evento_id"
   end
 
-  create_table "categories_events", id: false, force: :cascade do |t|
-    t.integer "category_id"
-    t.integer "event_id"
-  end
-
   create_table "categories_oficinas", id: false, force: :cascade do |t|
     t.integer "category_id"
     t.integer "oficina_id"
@@ -67,8 +62,7 @@ ActiveRecord::Schema.define(version: 20170705210617) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "name"
-    t.string   "link"
-    t.integer  "order"
+    t.text     "description"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
@@ -93,12 +87,19 @@ ActiveRecord::Schema.define(version: 20170705210617) do
 
   create_table "editions", force: :cascade do |t|
     t.string   "title"
-    t.datetime "year"
-    t.string   "local"
-    t.string   "tema"
+    t.string   "link"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.text     "subtitle"
+    t.text     "short_description"
+    t.string   "legend"
+    t.string   "duration"
+    t.string   "address"
+    t.float    "value"
+    t.string   "dates"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["user_id"], name: "index_editions_on_user_id"
   end
 
   create_table "eventos", force: :cascade do |t|
@@ -116,18 +117,18 @@ ActiveRecord::Schema.define(version: 20170705210617) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.float    "cost"
-    t.string   "location"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.datetime "publish_at"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "date_end"
+    t.string   "title"
+    t.string   "link"
+    t.text     "description"
+    t.text     "subtitle"
+    t.text     "short_description"
+    t.string   "legend"
+    t.string   "duration"
+    t.string   "address"
+    t.float    "value"
+    t.string   "dates"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "feiras", force: :cascade do |t|
@@ -146,6 +147,17 @@ ActiveRecord::Schema.define(version: 20170705210617) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["edition_id"], name: "index_image_editions_on_edition_id"
+  end
+
+  create_table "image_events", force: :cascade do |t|
+    t.string   "url_file_name"
+    t.string   "url_content_type"
+    t.integer  "url_file_size"
+    t.datetime "url_updated_at"
+    t.integer  "events_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["events_id"], name: "index_image_events_on_events_id"
   end
 
   create_table "image_news", force: :cascade do |t|
@@ -208,7 +220,6 @@ ActiveRecord::Schema.define(version: 20170705210617) do
     t.string   "address"
     t.float    "value"
     t.string   "dates"
-    t.datetime "publish_at"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.string   "video_url"

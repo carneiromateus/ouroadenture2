@@ -3,8 +3,7 @@ class CreateDirectors < ActiveRecord::Migration[5.0]
     create_table :directors do |t|
     	t.attachment :image
     	t.string :name
-    	t.string :link
-        t.integer :order
+    	t.text :description
     	t.timestamps
     end
   end

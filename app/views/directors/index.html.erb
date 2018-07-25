@@ -23,18 +23,16 @@
         <table>
           <thead>
             <tr>
-              <th>Ordem</th>
               <th>Nome</th>
-              <th>Link</th>
+              <th>Descriçao</th>
             </tr>
           </thead>
 
           <tbody>
             <% @directors.each do |director| %>
               <tr>
-                <td><%= director.order %></td>
                 <td><%= director.name %></td>
-                <td><%= director.link %></td>
+                <td><%= director.description %></td>
                 <td><%= link_to("<i class='fa fa-eye'></i>".html_safe, director, :title => 'Visualizar')%></td>
                 <td><%= link_to( "<i class='fa fa-edit'></i>".html_safe, edit_director_path(director), :title => 'Editar' )%></td>
                 <td><%=link_to( "<i class='fa fa-trash'></i>".html_safe, director, :method => :delete, :data => { :confirm => 'Tem certeza que deseja apagar?' }, :title => 'Excluir' )%></td>

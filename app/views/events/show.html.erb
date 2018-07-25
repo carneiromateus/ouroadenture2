@@ -3,7 +3,11 @@
 <% end %>
 
 <% content_for :title do %>
-  <%= "Festival de Inverno | " + @event.name %>
+  <%= "Festival de Inverno | " + truncate(@event.title, length: 160) %>
+<% end %>
+
+<% content_for :description do %>
+  <%= truncate(@event.description, length: 300) %>
 <% end %>
 
 <% content_for(:side_bar) do %>
@@ -14,31 +18,42 @@
   <div class="content-body" >
 
     <div id="news_show">
-      <div class="name">
-        <%= @event.name%>
-      </div>
-      <div class="local">
-        <%= @event.location %>
-      </div>
-      <div class="custo">
-        <%= @event.cost %>
-      </div>
+      <h5 class="title" >
+        <%= @event.title %> 
+      </h5>
+
+      <div class="description">
+        <%= @event.short_description.html_safe %>
+      </div>         
       <div class="description">
         <%= @event.description.html_safe %>
       </div>
-      <% if !@event.categories.empty?%>
-        <% @event.category_ids.each do |cat|%>
-          <div class="category">
-      	    <%= @event.categories.find(cat).name%>
-          </div>
-        <%end%>
-      <%end%>
+      <div class="row">
+        <div class="att col-md-12 left">
+          <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
+          <span class="description"><b>Duração: </b> <%= @event.duration %></span>
+
+        </div>
+        <div class="att col-md-12 left">
+          <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
+          <span class="description"><b>Local:</b> <%= @event.address %></span>
+        </div>  
+        <div class="att col-md-12 left">
+          <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
+          <span class="description"><b>Valor:</b> R$<%= @event.value %></span>
+        </div>
+        <div class="att col-md-12 left">
+          <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
+          <span class="description"><b>Datas:</b> <%= @event.dates %></span>
+        </div> 
+          
+      </div>
     </div>
    
 
     <% if user_signed_in? %>
       <%= link_to "Editar", edit_event_path(@event), class: "waves-effect waves-light btn" %>
-      <%= link_to "Deletar", events_path(@event), class: "waves-effect waves-light btn", method: :delete, data: {confirm: "Tem certeza desta Ação?"} %>
+      <%= link_to "Deletar", event_path(@event), class: "waves-effect waves-light btn", method: :delete, data: {confirm: "Tem certeza desta Ação?"} %>
     <% end %>
   </div>
 </div>
