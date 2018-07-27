@@ -58,16 +58,20 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-        <%= @news.director.each do |activity|%>
-        <div class="col-md-4">
-          <div class="col-md-3" style="margin-top:10%">
-            <img class="thumb_75" src="<%= activity.image%>"/>
+        <% @news.director.each do |activity|%>
+          <div class="col-md-4">
+            <div class="col-md-3" style="margin-top:10%">
+              <% if activity.image.exists?%>
+                <img class="thumb_75" src="<%= activity.image %>"/>
+              <%else%>
+                <img class="thumb_75" src="<%= image_url('category_3.png')%>"/>
+              <%end%>
+            </div>
+            <div class="col-md-9">
+              <h6 class="title"><%= activity.name%></h6>
+              <p class="description" style="height:100%"><%= activity.description%></p>
+            </div>
           </div>
-          <div class="col-md-9">
-            <h6 class="title"><%= activity.name%></h6>
-            <p class="description" style="height:100%"><%= activity.description%></p>
-          </div>
-        </div>
         <%end%>
         <div class="col-md-4">
           <div class="col-md-3" style="margin-top:10%">

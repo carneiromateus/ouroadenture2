@@ -11,6 +11,8 @@ class NewsController < ApplicationController
   # GET /news/1.json
   def show
     @more_news = News.where.not(id: @news.id).order("RANDOM()").limit(3)
+    @activities = Director.all
+
   end
 
   # GET /news/new
@@ -28,15 +30,25 @@ class NewsController < ApplicationController
   # POST /news.json
   def create
     @news = News.new(news_params)
-
     if user_signed_in?
       @news.user = current_user
     end
+              puts params
 
+    if params[:directors]
+      params[:directors].each { |director|
+        d = Director.find(director)
+        @news.director << d
+        puts d
+        puts@news.director_ids
+
+      }
+    end
+    puts @news.save!
     if params.has_key?(:images)
       respond_to do |format|
-        if @news.save
 
+        if @news.save
           if params[:images]
             params[:images].each { |image|
                 @news.image_news.create(url: image)
@@ -52,6 +64,8 @@ class NewsController < ApplicationController
       end
     else
       respond_to do |format|
+                    puts @news.director_ids
+
         if @news.save 
             format.html { redirect_to @news, notice: 'News was successfully created.' }
             format.json { render :show, status: :created, location: @news }

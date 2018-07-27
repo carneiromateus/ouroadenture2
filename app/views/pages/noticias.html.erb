@@ -1,7 +1,7 @@
 
 
 <% content_for :title do %>
-  <%= "Festival de Inverno" %>
+  <%= "Ouro Adventure - Roteiros" %>
 <% end %>
 
   
@@ -11,11 +11,17 @@
 </div>
 <div class="festival_container_home">
   <div class="row">
-     <div class="col-md-12" style="margin:30px 16%;">
+     <div class="col-md-8" style="margin:30px 18%;">
       <% @news.each do |item| %>
-        <div class="col-md-4 left"> 
-          <div class="image-center img-roteiro" style="background-image: url(<%=item.image_news.first.url(:medium)%>)">           
-          </div>
+        <div class="col-md-6 left"> 
+          <% if item.image_news.exists? %>
+            <div class="image-center img-roteiro" style="background-image: url(<%=item.image_news.first.url(:medium)%>)">           
+            </div>
+          <%else%>
+            <div class="image-center img-roteiro">           
+            </div>
+          <%end%>
+          
           <div class="text ">
             <h3 class="txt-roteiro"><%= link_to item.title, noticia_path(item) %></h3>
             <p class="description-roteiro"><%= item.short_description.html_safe.truncate(200, :omission => "...") %></p>

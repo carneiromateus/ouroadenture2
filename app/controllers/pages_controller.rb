@@ -9,7 +9,7 @@ class PagesController < ApplicationController
 		@slides = Slide.all.order(order: :asc)
 	end
     def noticias
-    @news = News.order('publish_at DESC').paginate(page: params[:page], per_page: 9)
+    @news = News.paginate(page: params[:page], per_page: 10)
   end
   def noticia
     @news = News.find(params[:id])

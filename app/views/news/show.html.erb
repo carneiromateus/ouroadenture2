@@ -46,7 +46,9 @@
           <img src="<%= image_url('category_4.png')%>" style="width:20px"/>
           <span class="description"><b>Datas:</b> <%= @news.dates %></span>
         </div> 
-          
+        <% @news.director.each do |act|%>
+          <%=act.name%>
+        <% end%>
       </div>
     </div>
    
