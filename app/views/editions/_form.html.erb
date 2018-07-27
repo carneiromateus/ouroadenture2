@@ -58,7 +58,7 @@
 
                 <label>*Atividade(s)</label>
                 <% @activities.each do |item| %>
-                    <input class="boolean optional" id="<%=item.name%> " value="<%=item.id%>" name="director_ids[]" type="checkbox" > 
+                    <input class="boolean optional" id="<%=item.name%> " value="<%=item.id%>" name="directors[]" type="checkbox" > 
                     <label class="boolean optional" for="<%=item.name%> "><%=item.name%></label>
                 <% end %>
 

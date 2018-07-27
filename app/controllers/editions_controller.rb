@@ -28,8 +28,16 @@ class EditionsController < ApplicationController
   # POST /editions.json
   def create
     @edition = Edition.new(edition_params)
+    puts params
+    if params[:directors]
+      params[:directors].each { |director|
+        d = Director.find(director)
+        @edition.director << d
+        puts d
+        puts@edition.director_ids
 
-
+      }
+    end
     if params.has_key?(:images)
       respond_to do |format|
         if @edition.save
@@ -55,9 +63,18 @@ class EditionsController < ApplicationController
   # PATCH/PUT /editions/1
   # PATCH/PUT /editions/1.json
   def update
+
     respond_to do |format|
        if @edition.update(edition_params)
 
+        if params[:directors]
+          params[:directors].each { |director|
+            d = Director.find(director)
+            @edition.director << d
+            puts d
+            puts@edition.director_ids
+          }
+        end
         if params[:images] and not params[:images].empty?
           @edition_images = @edition.image_edition
           @edition_images.destroy_all

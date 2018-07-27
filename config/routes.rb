@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get "roteiro/:id", to: "pages#noticia", as: :noticia
   get 'translados' => "pages#edicoes", as: :edicoes
   get "translado/:id", to: "pages#edicao", as: :edicao
-  
+  get "comofunciona" => "pages#ofestival", as: :ofestival
+  get "contato" => "pages#contato", as: :contact
 
 end

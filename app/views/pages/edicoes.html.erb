@@ -1,54 +1,81 @@
-<style type="text/css">
-  @media only screen and (min-width : 992px) {
-    .edition-item{
-        margin-left:27%!important;
-    }
-  }
-  @media only screen and (max-width : 992px) and (min-width:600px){
-    .edition-item{
-        margin-left:1%!important;
-    }
-  }
-  @media only screen and (max-width :600px){
-    a > img{
-      float:none!important;
-    }
-  }
-</style>
+
 
 <% content_for :title do %>
-  <%= "Festival de Inverno" %>
+  <%= "Ouro Adventure - Translados" %>
 <% end %>
 
-
+  
+<div class="top-container" style="background-image:url('<%=image_url('back_photo1.jpg') %>') ">
+  <image src="<%= image_url('13.1.png')%>" align="center" class="thumb_115"/>
+  <h3 align="center" class="primary-heading">Translados</h3>
+</div>
 <div class="festival_container_home">
   <div class="row">
-  <h2 class="title">Outras Edições</h2>
-  <div class="section-title-line"> ∎ </div>
-    <div class="row">
+     <div class="col-md-8" style="margin:30px 18%;">
       <% @editions.each do |item| %>
-
-        <div class="edition-item col s12 m12 l8 " style="margin-top:20px;margin-bottom:20px">
-            <div class="col s12 m6 l4">
-              <% if item.image_edition.present? %>
-                <% if item.local.present? %>
-                  <%= link_to image_tag(item.image_edition.first.url(:small),:style => "float:right"), item.local %>
-                <%else%>
-                    <%= link_to image_tag(item.image_edition.first.url(:small),:style => "float:right"), edicao_path(item) %>
-                <% end %>
-              <% end %>
+        <div class="col-md-6 left"> 
+          <% if item.image_edition.exists? %>
+            <div class="image-center img-roteiro" style="background-image: url(<%=item.image_edition.first.url(:medium)%>)">           
             </div>
-            <div class="col s12 m6 l4">
-              <p >Ano: <%= item.year.strftime("%Y") %></p>
-              <p >Tema: <%= item.tema%></p>
-              <p ><%= truncate(strip_tags(item.description), length: 200, omission: '...')%></p>
-            </div> 
-        </div>
-        
-      <% end -%>
-    </div>
-   
+          <%else%>
+            <div class="image-center img-roteiro">           
+            </div>
+          <%end%>
+          
+          <div class="text ">
+            <h3 class="txt-roteiro"><%= link_to item.title, edicao_path(item) %></h3>
+            <p class="description-roteiro"><%= item.short_description.html_safe.truncate(200, :omission => "...") %></p>
+            <a href="<%=edicao_path(item)%>#" class="btn_flat know_more link-sm">Saiba mais</a>
+          </div>
+        </div>     
+      <%end%>
+    </div>    
   </div>
- 
+  <div class="paginate" >
+    <%= will_paginate @editions, :previous_label => 'Seguinte', :next_label => 'Próximo' %>
+  </div>
 </div>
+
+
+<script type="text/javascript">
+  ;( function( $, window, document, undefined )
+  {
+      'use strict';
+   
+      var $list       = $( '.card-festival' ),
+          $items      = $list.find( '.card-festival-content' ),
+          setHeights  = function()
+          {
+              $items.css( 'height', 'auto' );
+   
+              var perRow = Math.floor( $list.width() / $items.width() );
+              if( perRow == null || perRow < 2 ) return true;
+   
+              for( var i = 0, j = $items.length; i < j; i += perRow )
+              {
+                  var maxHeight   = 0,
+                      $row        = $items.slice( i, i + perRow );
+   
+                  $row.each( function()
+                  {
+                      var itemHeight = parseInt( $( this ).outerHeight() );
+                      if ( itemHeight > maxHeight ) maxHeight = itemHeight;
+                  });
+                  $row.css( 'height', maxHeight );
+              }
+          };
+   
+      setHeights();
+      $( window ).on( 'resize', setHeights );
+   
+  })( jQuery, window, document );
+
+  jQuery(document).ready(function(){
+
+    $('.slider').slider({
+      indicators: true,
+      interval: 10000,
+    });
+  });
+</script>
 

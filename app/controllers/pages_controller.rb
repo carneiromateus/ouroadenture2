@@ -17,7 +17,7 @@ class PagesController < ApplicationController
 
   end
   def edicoes
-    @editions = Edition.all
+    @editions = Edition.paginate(page: params[:page], per_page: 10)
   end
   def edicao
     @edition = Edition.find(params[:id]) 
@@ -26,7 +26,7 @@ class PagesController < ApplicationController
 
   def index
     @news = News.all.order('created_at DESC').limit(2)
-    @translates = Edition.all.limit(2)
+    @editions = Edition.all.limit(2)
     @slides = Slide.all
   end
 
@@ -52,7 +52,6 @@ class PagesController < ApplicationController
   	@date_start = Event.order("publish_at ASC").limit(1).first
   	@date_end = Event.order("date_end DESC").limit(1).first
     @news = News.order('created_at DESC').paginate(page: params[:page], per_page: 9)
-
   end
   def eventojm
 		@event = Evento.find(params[:id])

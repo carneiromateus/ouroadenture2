@@ -33,18 +33,12 @@ class NewsController < ApplicationController
     if user_signed_in?
       @news.user = current_user
     end
-              puts params
-
     if params[:directors]
       params[:directors].each { |director|
         d = Director.find(director)
         @news.director << d
-        puts d
-        puts@news.director_ids
-
       }
     end
-    puts @news.save!
     if params.has_key?(:images)
       respond_to do |format|
 
@@ -81,6 +75,12 @@ class NewsController < ApplicationController
   # PATCH/PUT /news/1.json
   def update
     respond_to do |format|
+      if params[:directors]
+        params[:directors].each { |director|
+          d = Director.find(director)
+          @news.director << d
+        }
+      end
       if @news.update(news_params)
 
         if params[:images] and not params[:images].empty?
